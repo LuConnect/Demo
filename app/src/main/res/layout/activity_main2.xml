@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity2"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="Registration"
+        android:textColor="#3F51B5"
+        android:textSize="28sp"
+
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:text="Create Your Account"
+        android:textColor="#673AB7"
+        android:textSize="15sp"
+
+
+        />
+
+    //.......................................................
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/two_coloured"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+
+            android:src="@drawable/profile" />
+
+        <EditText
+            android:id="@+id/user"
+            android:layout_width="212dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:ems="10"
+            android:hint="Username"
+            android:inputType="textPersonName"
+            android:maxLength="10"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+    //,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/two_coloured"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+
+            android:src="@drawable/profile" />
+
+        <EditText
+            android:id="@+id/id"
+            android:layout_width="212dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="Student ID"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+    //,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/two_coloured"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+
+            android:src="@drawable/email" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="208dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="Email Address"
+            android:inputType="textEmailAddress"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    //,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/two_coloured">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/pass"
+
+            android:layout_gravity="center"
+            />
+
+        <EditText
+            android:id="@+id/pass1"
+            android:layout_width="211dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="Password"
+            android:inputType="numberPassword"
+            android:textSize="18sp" />
+
+
+
+    </LinearLayout>
+
+    //........................................
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/two_coloured"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/pass" />
+
+        <EditText
+            android:id="@+id/pass2"
+            android:layout_width="209dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="Confirm Password"
+            android:inputType="numberPassword"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    //........................................
+
+    <TextView
+        android:id="@+id/signup"
+        android:layout_width="121dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="100dp"
+        android:gravity="center"
+        android:text="SIGN UP"
+        android:textColor="#673AB7"
+        android:clickable="true"
+        android:background="@drawable/circle_transparent"
+        android:foreground="@drawable/circle_transparent"/>
+
+
+
+</LinearLayout>
