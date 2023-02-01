@@ -41,8 +41,6 @@ public class MainActivity3 extends AppCompatActivity {
                                 dialog.dismiss();
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                                     finishAndRemoveTask();
-                                    finishAffinity();
-
                                 }
                             }
                         })
