@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser mUser;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
         mUser = mAuth.getCurrentUser();
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-
-
-
 
 
         signin.setOnClickListener(new View.OnClickListener() {

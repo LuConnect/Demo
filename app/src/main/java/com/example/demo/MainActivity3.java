@@ -7,12 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
 
 public class MainActivity3 extends AppCompatActivity {
 
-    ImageView exit;
+    ImageView exit,profile;
 
 
 
@@ -22,6 +23,8 @@ public class MainActivity3 extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
 
         exit = findViewById(R.id.exit);
+        profile = findViewById(R.id.Bprofile);
+
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +53,21 @@ public class MainActivity3 extends AppCompatActivity {
                         .show();
             }
         });
+
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity3.this, MainActivity4.class));
+            }
+        });
+
+
+
+
+
+
+
 
 
     }
