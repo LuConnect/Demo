@@ -208,8 +208,7 @@
         android:textColor="#673AB7"
         android:clickable="true"
         android:background="@drawable/circle_transparent"
-        android:foreground="@drawable/circle_transparent"/>
-
-
+        android:foreground="@drawable/circle_transparent"
+        />
 
 </LinearLayout>
