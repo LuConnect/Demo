@@ -41,7 +41,7 @@ public class MainActivity3 extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                                    finishAndRemoveTask();
+//                                  finishAndRemoveTask();
                                     startActivity(new Intent(MainActivity3.this,MainActivity.class));
                                 }
                             }
