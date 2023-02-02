@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +41,8 @@ public class MainActivity3 extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                    finishAndRemoveTask();
+//                                    finishAndRemoveTask();
+                                    startActivity(new Intent(MainActivity3.this,MainActivity.class));
                                 }
                             }
                         })
