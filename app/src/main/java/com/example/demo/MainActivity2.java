@@ -66,7 +66,64 @@ public class MainActivity2 extends AppCompatActivity {
         String email= semail.getText().toString();
         String pass2= spass2.getText().toString();
 
-        if(user.length()<0)
+
+
+        if (user.length()>0){
+            if(id.length()<11 && id.length()>9){
+                if(email.matches(emailReg)){
+
+                    if(pass1.length()>8){
+                        if(pass1.equals(pass2)){
+                            progressDialog.setMessage("please wait while registration is completing...");
+                            progressDialog.setTitle("Registration");
+                            progressDialog.setCanceledOnTouchOutside(false);
+                            progressDialog.show();
+                            mAuth.createUserWithEmailAndPassword(email,pass1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(task.isSuccessful())
+                                    {
+                                        progressDialog.dismiss();
+                                        sendusertologin();
+                                        Toast.makeText(MainActivity2.this, "registration successful", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else{
+                                        progressDialog.dismiss();
+                                        Toast.makeText(MainActivity2.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+
+                        }
+                        else{
+                            spass2.setError("Password");
+                        }
+
+                    }
+                    else {
+                        spass1.setError("Password");
+                    }
+                }
+                else {
+                    semail.setError("Email!");
+                }
+
+            }
+            else{
+                sid.setError("Student id");
+
+            }
+        }
+        else {
+            suser.setError("Input Name");
+            sid.setError("Student id");
+            semail.setError("Email!");
+            spass1.setError("Password");
+            spass2.setError("Password");
+        }
+
+
+        /*if(user.length()<0)
         {
             suser.setError("invalid username");
         }
@@ -105,7 +162,7 @@ public class MainActivity2 extends AppCompatActivity {
                 }
             });
 
-        }
+        }*/
 
 
 

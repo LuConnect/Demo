@@ -32,19 +32,19 @@
         android:layout_width="match_parent"
         android:layout_height="26dp"
         android:textColor="#673AB7"
-        android:text="NAME"
+        android:text="EMAIL"
         android:textStyle="normal"
         android:textSize="16dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="40dp"
         />
     <EditText
-        android:id="@+id/edname"
+        android:id="@+id/edemail"
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="15dp"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:ems="10"
         android:padding="13dp"
         android:background="@drawable/corner"/>
