@@ -1,6 +1,7 @@
 package com.example.demo;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -14,11 +15,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -29,11 +41,28 @@ public class MainActivity4 extends AppCompatActivity {
     private Button Bsave;
     private FirebaseAuth auth;
     private Uri imageuri;
+    private StorageReference storageReference;
+    private FirebaseFirestore firestore;
+    private String Uid;
+    private ProgressBar progressBar;
+    private Uri downloadUri = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
+
+
+        storageReference = FirebaseStorage.getInstance().getReference();
+        firestore = FirebaseFirestore.getInstance();
+
+        auth = FirebaseAuth.getInstance();
+        Uid = auth.getCurrentUser().getUid();
+
+        progressBar = findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.INVISIBLE);
+
 
         circleImageView = findViewById(R.id.circleimage);
         profilename = findViewById(R.id.profilename);
@@ -41,12 +70,38 @@ public class MainActivity4 extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+
         Bsave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
+                String name = profilename.getText().toString();
+
+                if (name.isEmpty() && imageuri != null){
+                    StorageReference imageRef = storageReference.child("Profile").child(Uid + ".jpg");
+
+                    imageRef.putFile(imageuri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if (task.isSuccessful()){
+                                saveToFireStore(task, name, imageRef);
+                            }
+                            else{
+                                Toast.makeText(MainActivity4.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    });
+
+                }else{
+                    Toast.makeText(MainActivity4.this, "please select picture and write your name", Toast.LENGTH_SHORT).show();
+                }
+                progressBar.setVisibility(View.INVISIBLE);
 
             }
         });
+
+
 
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +123,34 @@ public class MainActivity4 extends AppCompatActivity {
                                 .start(MainActivity4.this);
                     }
                 }
+            }
+        });
+
+    }
+
+    private void saveToFireStore(Task<UploadTask.TaskSnapshot> task, String name, StorageReference imageRef) {
+        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                downloadUri = uri;
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("name", name);
+                map.put("image", downloadUri.toString());
+
+                firestore.collection("Users").document(Uid).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(MainActivity4.this, "profile settings saved", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity4.this, MainActivity3.class));
+                            finish();
+                        }else{
+                            Toast.makeText(MainActivity4.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
             }
         });
 
