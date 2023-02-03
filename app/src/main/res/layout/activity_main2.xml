@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity2"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="#98BA7D">
 
     <TextView
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:layout_marginTop="60dp"
         android:gravity="center"
         android:text="Registration"
-        android:textColor="#3F51B5"
+        android:textColor="#194E48"
         android:textSize="28sp"
 
 
@@ -25,7 +25,7 @@
         android:layout_height="20dp"
         android:gravity="center"
         android:text="Create Your Account"
-        android:textColor="#673AB7"
+        android:textColor="#194E48"
         android:textSize="15sp"
 
 
@@ -61,7 +61,10 @@
             android:hint="Username"
             android:inputType="textPersonName"
             android:maxLength="10"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColorHint="#5C5454"
+            android:textColor="#5C5454"
+            />
 
 
     </LinearLayout>
@@ -93,7 +96,10 @@
             android:hint="Student ID"
             android:inputType="number"
             android:maxLength="10"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColorHint="#5C5454"
+            android:textColor="#5C5454"
+            />
 
 
     </LinearLayout>
@@ -124,7 +130,10 @@
             android:layout_marginLeft="10dp"
             android:hint="Email Address"
             android:inputType="textEmailAddress"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColorHint="#5C5454"
+            android:textColor="#5C5454"
+            />
 
 
     </LinearLayout>
@@ -157,7 +166,9 @@
             android:layout_marginLeft="10dp"
             android:hint="Password"
             android:inputType="numberPassword"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColorHint="#5C5454"
+            android:textColor="#5C5454"/>
 
 
 
@@ -189,7 +200,9 @@
             android:layout_marginLeft="10dp"
             android:hint="Confirm Password"
             android:inputType="numberPassword"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColorHint="#5C5454"
+            android:textColor="#5C5454"/>
 
 
     </LinearLayout>
@@ -200,15 +213,16 @@
         android:id="@+id/signup"
         android:layout_width="121dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginLeft="100dp"
         android:layout_marginTop="40dp"
         android:layout_marginRight="100dp"
         android:gravity="center"
         android:text="SIGN UP"
-        android:textColor="#673AB7"
+        android:textColor="#194E48"
         android:clickable="true"
         android:background="@drawable/circle_transparent"
         android:foreground="@drawable/circle_transparent"
+        android:layout_gravity="center"
         />
 
 </LinearLayout>

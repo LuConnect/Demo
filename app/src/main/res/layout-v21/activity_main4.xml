@@ -11,12 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#FFFFFF">
-        
+        android:background="#BED1FC">
+
+        <Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:title="Profile"
+            android:titleTextColor="#F1F8FF"
+            android:background="#7D80C7"
+            android:titleMarginStart="180sp"
+            tools:targetApi="lollipop"
+            />
 
 
-        
-    <de.hdodenhof.circleimageview.CircleImageView
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleimage"
         android:layout_width="110dp"
         android:layout_height="110dp"
@@ -40,8 +51,8 @@
             android:background="@drawable/circle_transparent"
             android:ems="10"
             android:layout_gravity="center"
-            android:textColor="#000000"
-            android:textColorHint="#000000"
+            android:textColor="#F1F8FF"
+            android:textColorHint="#7D80C7"
             android:hint="@string/username"
             android:inputType="textPersonName"
             android:clickable="true"
@@ -59,10 +70,10 @@
             android:layout_marginTop="40dp"
             android:layout_gravity="center"
             android:textStyle="bold"
-            android:backgroundTint="#3F51B5"
+            android:backgroundTint="#7D80C7"
             android:hint="@string/save"
             android:text="SAVE"
-            android:textColor="#000000"
+            android:textColor="#F1F8FF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

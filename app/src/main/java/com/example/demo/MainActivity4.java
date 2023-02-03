@@ -41,6 +41,13 @@ public class MainActivity4 extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        Bsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
