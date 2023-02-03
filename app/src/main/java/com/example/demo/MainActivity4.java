@@ -44,9 +44,15 @@ public class MainActivity4 extends AppCompatActivity {
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if (ContextCompat.checkSelfPermission(MainActivity4.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-                        ActivityCompat.requestPermissions(MainActivity4.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+
+                    int result = ContextCompat.checkSelfPermission( MainActivity4.this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
+
+                    if (result != PackageManager.PERMISSION_GRANTED){
+                        ActivityCompat.requestPermissions(MainActivity4.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                     }
                     else{
                         CropImage.activity()
