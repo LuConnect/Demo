@@ -114,7 +114,7 @@
                         android:layout_height="240dp"
                         android:layout_margin="20dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/img_2" />
+                        android:src="@drawable/img_3" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -147,7 +147,7 @@
                         android:layout_height="240dp"
                         android:layout_margin="20dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/img_3" />
+                        android:src="@drawable/img_2" />
 
                     <TextView
                         android:layout_width="match_parent"

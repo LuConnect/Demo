@@ -1,88 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity4"
-
-   >
+    tools:context=".MainActivity5">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#BED1FC">
+        android:background="#222831"
+        >
 
-        <Toolbar
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+
+
+
+
+            <TextView
+                android:id="@+id/b1"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="SIGN IN"
+                android:layout_gravity="right"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="16sp"
+                android:layout_marginLeft="320sp"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+
+                />
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+        //,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:title="Profile"
-            android:titleTextColor="#F1F8FF"
-            android:background="#7D80C7"
-            android:titleMarginStart="180sp"
-            tools:targetApi="lollipop"
-            />
+            android:orientation="vertical"
+            android:background="#393E46">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circleimage"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="140dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="20dp">
 
-        android:layout_gravity="center"
-        android:src="@drawable/user"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="173dp"
-        />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="#C1C9CC">
 
-        <ProgressBar
-            android:id="@+id/progressBar2"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:layout_margin="20dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img" />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="22sp"
+                        android:textAlignment="inherit"
+                        android:textColor="#000000"
+                        android:text="Leading University – One of the best private universities in Sylhet. Leading University (or LU) is one of the top private universities in Sylhet Division of Bangladesh. It was established in 2001 under the Private University Act 1992. It's the only campus is located in Ragib Nagar, Kamal Bazar, South Surma, Sylhet."
+                        />
+                </LinearLayout>
 
-        <EditText
-            android:id="@+id/profilename"
-            android:layout_width="wrap_content"
-            android:layout_height="53dp"
+            </LinearLayout>
+            //,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/circle_transparent"
-            android:ems="10"
-            android:layout_gravity="center"
-            android:textColor="#F1F8FF"
-            android:textColorHint="#7D80C7"
-            android:hint="@string/username"
-            android:inputType="textPersonName"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="378dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="20dp">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:backgroundTint="#7D80C7"
-            android:hint="@string/save"
-            android:text="SAVE"
-            android:textColor="#F1F8FF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="493dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="#C1C9CC">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:layout_margin="20dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="22sp"
+                        android:textAlignment="inherit"
+                        android:textColor="#000000"
+                        android:text="Leading University – One of the best private universities in Sylhet. Leading University (or LU) is one of the top private universities in Sylhet Division of Bangladesh. It was established in 2001 under the Private University Act 1992. It's the only campus is located in Ragib Nagar, Kamal Bazar, South Surma, Sylhet."/>
+                </LinearLayout>
+
+            </LinearLayout>
+            //,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="#EEEEEE">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:layout_margin="20dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textSize="22sp"
+                        android:textAlignment="inherit"
+                        android:textColor="#000000"
+                        android:text="Leading University – One of the best private universities in Sylhet. Leading University (or LU) is one of the top private universities in Sylhet Division of Bangladesh. It was established in 2001 under the Private University Act 1992. It's the only campus is located in Ragib Nagar, Kamal Bazar, South Surma, Sylhet."/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>
