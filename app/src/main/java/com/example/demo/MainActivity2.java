@@ -86,9 +86,11 @@ public class MainActivity2 extends AppCompatActivity {
                                         progressDialog.dismiss();
                                         sendusertologin();
                                         Toast.makeText(MainActivity2.this, "registration successful", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(MainActivity2.this,MainActivity4.class));
+                                        finish();
                                     }
                                     else{
-                                        progressDialog.dismiss();
+
                                         Toast.makeText(MainActivity2.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
                                     }
                                 }

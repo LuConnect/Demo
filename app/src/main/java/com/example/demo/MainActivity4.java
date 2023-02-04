@@ -19,10 +19,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -71,19 +73,40 @@ public class MainActivity4 extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
 
+
+
+       firestore.collection("Users").document(Uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+           @Override
+           public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+               if(task.isSuccessful()){
+                   if (task.getResult().exists()){
+                       String name = task.getResult().getString("name");
+                       String imageUrl = task.getResult().getString("image");
+                       profilename.setText(name);
+                       Glide.with(MainActivity4.this).load(imageUrl).into(circleImageView);
+
+                   }
+
+               }
+           }
+       });
+
+
+
         Bsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
                 String name = profilename.getText().toString();
 
-                if (name.isEmpty() && imageuri != null){
+                if (!name.isEmpty() && imageuri != null){
                     StorageReference imageRef = storageReference.child("Profile").child(Uid + ".jpg");
 
                     imageRef.putFile(imageuri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                             if (task.isSuccessful()){
+                                progressBar.setVisibility(View.INVISIBLE);
                                 saveToFireStore(task, name, imageRef);
                             }
                             else{
@@ -94,9 +117,10 @@ public class MainActivity4 extends AppCompatActivity {
                     });
 
                 }else{
+                    progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(MainActivity4.this, "please select picture and write your name", Toast.LENGTH_SHORT).show();
                 }
-                progressBar.setVisibility(View.INVISIBLE);
+
 
             }
         });
