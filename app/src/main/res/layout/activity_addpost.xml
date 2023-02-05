@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity4"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#BED1FC">
+
+        <Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:title="Create Post"
+            android:titleTextColor="#F1F8FF"
+            android:background="#7D80C7"
+            android:titleMarginStart="180sp"
+            tools:targetApi="lollipop"
+            />
+
+
+
+<!--        <ImageView-->
+<!--            android:id="@+id/createimg"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="250dp"-->
+<!--            android:background="@drawable/menu_icon"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            />-->
+
+        <ProgressBar
+            android:id="@+id/progressBar3"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <EditText
+            android:id="@+id/cratepost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="60dp"
+            android:layout_marginHorizontal="30dp"
+            android:ems="10"
+            android:layout_gravity="center"
+            android:textColor="#F1F8FF"
+            android:textColorHint="#7D80C7"
+            android:hint="Write your post"
+            android:inputType="text"
+            android:clickable="true"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+<!--            tools:layout_editor_absoluteY="378dp" />-->
+
+
+        <Button
+            android:id="@+id/post_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:backgroundTint="#7D80C7"
+            android:hint="@string/save"
+            android:text="SAVE"
+            android:textColor="#F1F8FF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="493dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
