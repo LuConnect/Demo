@@ -4,9 +4,9 @@ public class postAdaptor {
 
     private String cap, time;
 
-    public postAdaptor(String caption, String timestamp) {
+    public postAdaptor(String caption, String time) {
         this.cap = caption;
-        this.time = timestamp;
+        this.time = time;
 
     }
 

@@ -48,8 +48,6 @@ public class MainActivity4 extends AppCompatActivity {
     private String Uid;
     private ProgressBar progressBar;
     private Uri downloadUri = null;
-    private boolean isPhotoSelected = false;
-
 
 
     @Override
@@ -77,22 +75,22 @@ public class MainActivity4 extends AppCompatActivity {
 
 
 
-       firestore.collection("Users").document(Uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-           @Override
-           public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-               if(task.isSuccessful()){
-                   if (task.getResult().exists()){
-                       String name = task.getResult().getString("name");
-                       String imageUrl = task.getResult().getString("image");
-                       profilename.setText(name);
-                       imageuri =Uri.parse(imageUrl);
-                       Glide.with(MainActivity4.this).load(imageUrl).into(circleImageView);
 
-                   }
+        firestore.collection("Users").document(Uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    if (task.getResult().exists()){
+                        String name = task.getResult().getString("name");
+                        String imageUrl = task.getResult().getString("image");
+                        profilename.setText(name);
+                        Glide.with(MainActivity4.this).load(imageUrl).into(circleImageView);
 
-               }
-           }
-       });
+                    }
+
+                }
+            }
+        });
 
 
 
@@ -101,40 +99,31 @@ public class MainActivity4 extends AppCompatActivity {
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
                 String name = profilename.getText().toString();
-                StorageReference imageRef = storageReference.child("Profile").child(Uid + ".jpg");
 
-                if(isPhotoSelected) {
+                if (!name.isEmpty() && imageuri != null){
+                    StorageReference imageRef = storageReference.child("Profile").child(Uid + ".jpg");
 
-                    if (!name.isEmpty() && imageuri != null) {
-
-
-                        imageRef.putFile(imageuri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    progressBar.setVisibility(View.INVISIBLE);
-                                    saveToFireStore(task, name, imageRef);
-                                } else {
-                                    Toast.makeText(MainActivity4.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-
+                    imageRef.putFile(imageuri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if (task.isSuccessful()){
+                                progressBar.setVisibility(View.INVISIBLE);
+                                saveToFireStore(task, name, imageRef);
                             }
-                        });
+                            else{
+                                Toast.makeText(MainActivity4.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
 
-                    } else {
-                        progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(MainActivity4.this, "please select picture and write your name", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else{
-                    saveToFireStore(null, name,imageRef);
+                }else{
+                    progressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(MainActivity4.this, "please select picture and write your name", Toast.LENGTH_SHORT).show();
                 }
 
 
             }
         });
-
-
 
 
 
