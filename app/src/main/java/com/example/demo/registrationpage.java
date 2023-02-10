@@ -17,7 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity2 extends AppCompatActivity {
+public class registrationpage extends AppCompatActivity {
 
     EditText suser,sid,spass1,semail,spass2;
     TextView signup;
@@ -85,13 +85,13 @@ public class MainActivity2 extends AppCompatActivity {
                                     {
                                         progressDialog.dismiss();
                                         sendusertologin();
-                                        Toast.makeText(MainActivity2.this, "registration successful", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(MainActivity2.this,MainActivity4.class));
+                                        Toast.makeText(registrationpage.this, "registration successful", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(registrationpage.this, setprofile.class));
                                         finish();
                                     }
                                     else{
 
-                                        Toast.makeText(MainActivity2.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(registrationpage.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -171,7 +171,7 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     private void sendusertologin() {
-        Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+        Intent intent = new Intent(registrationpage.this, loginpage.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

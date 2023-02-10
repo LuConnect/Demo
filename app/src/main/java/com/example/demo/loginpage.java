@@ -21,7 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class loginpage extends AppCompatActivity {
 
     EditText edemail,edpass;
     TextView signin,signup;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,MainActivity2.class));
+                startActivity(new Intent(loginpage.this, registrationpage.class));
 
             }
         });
@@ -94,13 +94,13 @@ public class MainActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             progressDialog.dismiss();
                             sendusertologin();
-                            Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(loginpage.this, "Login successful", Toast.LENGTH_SHORT).show();
 
                         }
                         else
                         {
                             progressDialog.dismiss();
-                            Toast.makeText(MainActivity.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(loginpage.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else {
-            new AlertDialog.Builder(MainActivity.this)
+            new AlertDialog.Builder(loginpage.this)
                     .setTitle("No Internet")
                     .setMessage("Connect to the Network.")
                     .show();
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void sendusertologin() {
-        Intent intent = new Intent(MainActivity.this, MainActivity3.class);
+        Intent intent = new Intent(loginpage.this, postview.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

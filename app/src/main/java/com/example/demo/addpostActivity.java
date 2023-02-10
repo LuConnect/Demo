@@ -1,9 +1,11 @@
 package com.example.demo;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.OAuthCredential;
@@ -21,6 +24,9 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.util.HashMap;
 
@@ -28,7 +34,9 @@ public class addpostActivity extends AppCompatActivity {
 
     private Button mpostButton;
     private EditText mcaptionButton;
+    private ImageView mpostImage;
     private ProgressBar mprogressbar;
+    private Uri postImageUri = null;
     private StorageReference storageReference;
     private FirebaseFirestore firestore;
     private FirebaseAuth auth;
@@ -42,6 +50,7 @@ public class addpostActivity extends AppCompatActivity {
 
         mpostButton = findViewById(R.id.post_button);
         mcaptionButton = findViewById(R.id.cratepost);
+        mpostImage = findViewById(R.id.createimg);
 
         mprogressbar = findViewById(R.id.progressBar3);
         mprogressbar.setVisibility(View.INVISIBLE);
@@ -51,26 +60,84 @@ public class addpostActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         currentUserId = auth.getCurrentUser().getUid();
 
-        mpostButton.setOnClickListener(new View.OnClickListener() {
+
+        mpostImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mprogressbar.setVisibility(View.VISIBLE);
-//                String caption = mcaptionButton.getText().toString();
-                //String timestamp = FieldValue.serverTimestamp().toString();
-                HashMap<String , Object> postMap = new HashMap<>();
-
-                postMap.put("user" , currentUserId);
-                postMap.put("caption" , mcaptionButton);
-                postMap.put("time" , FieldValue.serverTimestamp());
-
-                firestore.collection("Post").document(currentUserId).set(new postAdaptor(mcaptionButton.getText().toString(), FieldValue.serverTimestamp().toString()));
-                Toast.makeText(addpostActivity.this, "Post Created", Toast.LENGTH_SHORT).show();
-
-
-
-           }
+                CropImage.activity()
+                        .setGuidelines(CropImageView.Guidelines.ON)
+                        .setAspectRatio(3,2)
+                        .setMinCropResultSize(512,512)
+                        .start(addpostActivity.this);
+            }
         });
 
 
+        mpostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mprogressbar.setVisibility(View.VISIBLE);
+                String caption = mcaptionButton.getText().toString();
+                if (!caption.isEmpty() && postImageUri !=null){
+                    StorageReference postRef = storageReference.child("post_images").child(FieldValue.serverTimestamp().toString() + ".jpg");
+                    postRef.putFile(postImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if (task.isSuccessful()){
+                                postRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        HashMap<String , Object> postMap = new HashMap<>();
+                                        postMap.put("image" , uri.toString());
+                                        postMap.put("user" , currentUserId);
+                                        postMap.put("caption" , caption);
+                                        postMap.put("time" , FieldValue.serverTimestamp());
+
+                                        firestore.collection("Posts").add(postMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                                                if (task.isSuccessful()){
+                                                    mprogressbar.setVisibility(View.INVISIBLE);
+                                                    Toast.makeText(addpostActivity.this, "Post Added Successfully !!", Toast.LENGTH_SHORT).show();
+                                                    startActivity(new Intent(addpostActivity.this , postview.class));
+                                                    finish();
+                                                }else{
+                                                    mprogressbar.setVisibility(View.INVISIBLE);
+                                                    Toast.makeText(addpostActivity.this, task.getException().toString() , Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                                    }
+                                });
+
+                            }else{
+                                mprogressbar.setVisibility(View.INVISIBLE);
+                                Toast.makeText(addpostActivity.this, task.getException().getMessage() , Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }else{
+                    mprogressbar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(addpostActivity.this, "Please Add Image and Write Your caption", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK){
+
+                postImageUri = result.getUri();
+                mpostImage.setImageURI(postImageUri);
+            }else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
+                Toast.makeText(this, result.getError().toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

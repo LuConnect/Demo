@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity5 extends AppCompatActivity {
+public class startpage extends AppCompatActivity {
 
     TextView b1;
 
@@ -22,7 +21,7 @@ public class MainActivity5 extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity5.this,MainActivity.class));
+                startActivity(new Intent(startpage.this, loginpage.class));
             }
         });
     }

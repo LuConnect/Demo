@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,7 +35,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity4 extends AppCompatActivity {
+public class setprofile extends AppCompatActivity {
 
     private CircleImageView circleImageView;
     private EditText profilename;
@@ -44,10 +43,12 @@ public class MainActivity4 extends AppCompatActivity {
     private FirebaseAuth auth;
     private Uri imageuri;
     private StorageReference storageReference;
+
     private FirebaseFirestore firestore;
     private String Uid;
     private ProgressBar progressBar;
     private Uri downloadUri = null;
+
 
 
     @Override
@@ -75,7 +76,6 @@ public class MainActivity4 extends AppCompatActivity {
 
 
 
-
         firestore.collection("Users").document(Uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -84,7 +84,7 @@ public class MainActivity4 extends AppCompatActivity {
                         String name = task.getResult().getString("name");
                         String imageUrl = task.getResult().getString("image");
                         profilename.setText(name);
-                        Glide.with(MainActivity4.this).load(imageUrl).into(circleImageView);
+                        Glide.with(setprofile.this).load(imageUrl).into(circleImageView);
 
                     }
 
@@ -111,14 +111,14 @@ public class MainActivity4 extends AppCompatActivity {
                                 saveToFireStore(task, name, imageRef);
                             }
                             else{
-                                Toast.makeText(MainActivity4.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(setprofile.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
 
                 }else{
                     progressBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(MainActivity4.this, "please select picture and write your name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(setprofile.this, "please select picture and write your name", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -135,16 +135,16 @@ public class MainActivity4 extends AppCompatActivity {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
 
-                    int result = ContextCompat.checkSelfPermission( MainActivity4.this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
+                    int result = ContextCompat.checkSelfPermission( setprofile.this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
 
                     if (result != PackageManager.PERMISSION_GRANTED){
-                        ActivityCompat.requestPermissions(MainActivity4.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                        ActivityCompat.requestPermissions(setprofile.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                     }
                     else{
                         CropImage.activity()
                                 .setGuidelines(CropImageView.Guidelines.ON)
                                 .setAspectRatio(1,1)
-                                .start(MainActivity4.this);
+                                .start(setprofile.this);
                     }
                 }
             }
@@ -165,11 +165,11 @@ public class MainActivity4 extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(MainActivity4.this, "profile settings saved", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity4.this, MainActivity3.class));
+                            Toast.makeText(setprofile.this, "profile settings saved", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(setprofile.this, postview.class));
                             finish();
                         }else{
-                            Toast.makeText(MainActivity4.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(setprofile.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
