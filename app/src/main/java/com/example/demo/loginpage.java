@@ -117,7 +117,7 @@ public class loginpage extends AppCompatActivity {
 
     }
     private void sendusertologin() {
-        Intent intent = new Intent(loginpage.this, postview.class);
+        Intent intent = new Intent(loginpage.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

@@ -3,6 +3,7 @@ package com.example.demo;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -41,6 +43,7 @@ public class addpostActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private FirebaseAuth auth;
     private String currentUserId;
+    private Toolbar postToolbar;
 
 
     @Override
@@ -54,6 +57,10 @@ public class addpostActivity extends AppCompatActivity {
 
         mprogressbar = findViewById(R.id.progressBar3);
         mprogressbar.setVisibility(View.INVISIBLE);
+
+        postToolbar = findViewById(R.id.addposttoolbar);
+        setSupportActionBar(postToolbar);
+        getSupportActionBar().setTitle("Add Post");
 
         storageReference = FirebaseStorage.getInstance().getReference();
         firestore = FirebaseFirestore.getInstance();
@@ -99,7 +106,7 @@ public class addpostActivity extends AppCompatActivity {
                                                 if (task.isSuccessful()){
                                                     mprogressbar.setVisibility(View.INVISIBLE);
                                                     Toast.makeText(addpostActivity.this, "Post Added Successfully !!", Toast.LENGTH_SHORT).show();
-                                                    startActivity(new Intent(addpostActivity.this , postview.class));
+                                                    startActivity(new Intent(addpostActivity.this , MainActivity.class));
                                                     finish();
                                                 }else{
                                                     mprogressbar.setVisibility(View.INVISIBLE);

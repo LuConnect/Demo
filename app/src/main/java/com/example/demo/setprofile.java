@@ -4,6 +4,7 @@ package com.example.demo;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,6 +57,10 @@ public class setprofile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
+
+        Toolbar setupToolbar = findViewById(R.id.setuptoolbar);
+        setSupportActionBar(setupToolbar);
+        getSupportActionBar().setTitle("Profile");
 
 
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -166,7 +172,7 @@ public class setprofile extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(setprofile.this, "profile settings saved", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(setprofile.this, postview.class));
+                            startActivity(new Intent(setprofile.this, MainActivity.class));
                             finish();
                         }else{
                             Toast.makeText(setprofile.this, task.getException().toString(), Toast.LENGTH_SHORT).show();

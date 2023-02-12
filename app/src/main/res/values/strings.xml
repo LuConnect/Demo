@@ -2,4 +2,7 @@
     <string name="app_name">Demo</string>
     <string name="username">Enter Your Name</string>
     <string name="save">save</string>
+    <string name="Home">Home</string>
+    <string name="Profile">Profile</string>
+    <string name="Logout">Logout</string>
 </resources>

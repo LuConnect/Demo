@@ -13,15 +13,15 @@
         android:orientation="vertical"
         android:background="#BED1FC">
 
-        <Toolbar
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/setuptoolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:title="Profile"
-            android:titleTextColor="#F1F8FF"
-            android:background="#7D80C7"
-            android:titleMarginStart="180sp"
-            tools:targetApi="lollipop"
-            />
+            android:background="@color/teal_700"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
 
