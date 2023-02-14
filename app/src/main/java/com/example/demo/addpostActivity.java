@@ -1,10 +1,5 @@
 package com.example.demo;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,13 +10,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.OAuthCredential;
-import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -29,8 +28,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-
-import java.util.HashMap;
 
 public class addpostActivity extends AppCompatActivity {
 
@@ -44,6 +41,7 @@ public class addpostActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private String currentUserId;
     private Toolbar postToolbar;
+    private FirebaseDatabase database;
 
 
     @Override
@@ -83,6 +81,8 @@ public class addpostActivity extends AppCompatActivity {
         mpostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //String captio = mcaptionButton.getText().toString();
+
                 mprogressbar.setVisibility(View.VISIBLE);
                 String caption = mcaptionButton.getText().toString();
                 if (!caption.isEmpty() && postImageUri !=null){
@@ -94,26 +94,38 @@ public class addpostActivity extends AppCompatActivity {
                                 postRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                     @Override
                                     public void onSuccess(Uri uri) {
-                                        HashMap<String , Object> postMap = new HashMap<>();
-                                        postMap.put("image" , uri.toString());
-                                        postMap.put("user" , currentUserId);
-                                        postMap.put("caption" , caption);
-                                        postMap.put("time" , FieldValue.serverTimestamp());
+//                                        HashMap<String , Object> postMap = new HashMap<>();
+//                                        postMap.put("image" , uri.toString());
+//                                        postMap.put("user" , currentUserId);
+//                                        postMap.put("caption" , caption);
+//                                        postMap.put("time" , FieldValue.serverTimestamp());
 
-                                        firestore.collection("Posts").add(postMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<DocumentReference> task) {
-                                                if (task.isSuccessful()){
-                                                    mprogressbar.setVisibility(View.INVISIBLE);
-                                                    Toast.makeText(addpostActivity.this, "Post Added Successfully !!", Toast.LENGTH_SHORT).show();
-                                                    startActivity(new Intent(addpostActivity.this , MainActivity.class));
-                                                    finish();
-                                                }else{
-                                                    mprogressbar.setVisibility(View.INVISIBLE);
-                                                    Toast.makeText(addpostActivity.this, task.getException().toString() , Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
+                                        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                        database = FirebaseDatabase.getInstance();
+                                        DatabaseReference root =  database.getReference("Post");
+                                        adapt1 Post = new adapt1(postImageUri.toString(),currentuser, caption, FieldValue.serverTimestamp());
+                                        String key = root.push().getKey();
+                                        root.child(key).setValue(Post);
+                                        mprogressbar.setVisibility(View.INVISIBLE);
+                                        Toast.makeText(addpostActivity.this, "Post Added Successfully !!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(addpostActivity.this , MainActivity.class));
+                                        finish();
+
+
+//                                        firestore.collection("Posts").add(postMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+//                                            @Override
+//                                            public void onComplete(@NonNull Task<DocumentReference> task) {
+//                                                if (task.isSuccessful()){
+//                                                    mprogressbar.setVisibility(View.INVISIBLE);
+//                                                    Toast.makeText(addpostActivity.this, "Post Added Successfully !!", Toast.LENGTH_SHORT).show();
+//                                                    startActivity(new Intent(addpostActivity.this , MainActivity.class));
+//                                                    finish();
+//                                                }else{
+//                                                    mprogressbar.setVisibility(View.INVISIBLE);
+//                                                    Toast.makeText(addpostActivity.this, task.getException().toString() , Toast.LENGTH_SHORT).show();
+//                                                }
+//                                            }
+//                                        });
                                     }
                                 });
 

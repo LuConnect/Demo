@@ -56,7 +56,7 @@ public class setprofile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main4);
+        setContentView(R.layout.setprofile);
 
         Toolbar setupToolbar = findViewById(R.id.setuptoolbar);
         setSupportActionBar(setupToolbar);

@@ -30,7 +30,7 @@ public class registrationpage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.registrationpage);
         suser = findViewById(R.id.user);
         sid = findViewById(R.id.id);
         spass1 = findViewById(R.id.pass1);
