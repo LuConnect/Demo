@@ -86,7 +86,7 @@ public class addpostActivity extends AppCompatActivity {
                 mprogressbar.setVisibility(View.VISIBLE);
                 String caption = mcaptionButton.getText().toString();
                 if (!caption.isEmpty() && postImageUri !=null){
-                    StorageReference postRef = storageReference.child("post_images").child(FieldValue.serverTimestamp().toString() + ".jpg");
+                    StorageReference postRef = storageReference.child("post_images").child( ".jpg");
                     postRef.putFile(postImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -103,7 +103,7 @@ public class addpostActivity extends AppCompatActivity {
                                         String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                         database = FirebaseDatabase.getInstance();
                                         DatabaseReference root =  database.getReference("Post");
-                                        adapt1 Post = new adapt1(postImageUri.toString(),currentuser, caption, FieldValue.serverTimestamp());
+                                        adapt1 Post = new adapt1(postImageUri.toString(),currentuser, caption);
                                         String key = root.push().getKey();
                                         root.child(key).setValue(Post);
                                         mprogressbar.setVisibility(View.INVISIBLE);

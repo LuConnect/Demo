@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new PostAdaptor(options);
         mRecyclerView.setAdapter(adapter);
-
+        //adapter.startListening();
 
     }
 

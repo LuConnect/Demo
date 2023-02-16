@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import com.google.firebase.firestore.FieldValue;
-
 public class adapt1 {
 
     private String postImageUri,currentUserId,caption,Time;
@@ -9,11 +7,11 @@ public class adapt1 {
 
 
 
-    public adapt1(String postImageUri, String currentUserId, String caption, FieldValue time) {
+    public adapt1(String postImageUri, String currentUserId, String caption) {
         this.postImageUri = postImageUri;
         this.currentUserId = currentUserId;
         this.caption = caption;
-        this.Time = String.valueOf(time);
+        //this.Time = String.valueOf(time);
     }
 
     public String getPostImageUri() {
@@ -32,19 +30,19 @@ public class adapt1 {
         this.currentUserId = currentUserId;
     }
 
-    public String getCaptio() {
+    public String getCaption() {
         return caption;
     }
 
-    public void setCaptio(String captio) {
+    public void setCaption(String caption) {
         this.caption = caption;
     }
 
-    public String getTime() {
-        return Time;
-    }
-
-    public void setTime(String time) {
-        Time = time;
-    }
+//    public String getTime() {
+//        return Time;
+//    }
+//
+//    public void setTime(String time) {
+//        Time = time;
+//    }
 }

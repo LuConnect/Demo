@@ -1,25 +1,39 @@
 package com.example.demo.adaptor;
 
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.demo.MainActivity;
 import com.example.demo.R;
 import com.example.demo.model.post;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myviewholder>
 {
+
+    private FirebaseFirestore firestore;
+
+
     public PostAdaptor(@NonNull FirebaseRecyclerOptions<post> options) {
         super(options);
     }
@@ -27,20 +41,25 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
     @Override
     protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull post model) {
 
-        holder.postUsername.setText(model.getUser());
 
-//        long milliseconds = model.getTime().getTime();
-//        String date = DateFormat.format("MM/DD/yyyy", new Date(milliseconds)).toString();
-//        holder.postDate.setText(date);
         holder.postCaption.setText(model.getCaption());
+        System.out.println("caption: "+ model.getCaption());
         Glide.with(holder.postPic.getContext()).load(model.getImage()).into(holder.postPic);
-        //Glide.with(holder.profilePic.getContext()).load(model.getImage()).into(holder.profilePic);
 
+        firestore = FirebaseFirestore.getInstance();
+        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DocumentReference documentReference = firestore.collection("Users").document(currentUser);
 
-
-
-
-
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()){
+                    String userName = documentSnapshot.getString("name");
+                    holder.postUsername.setText(userName);
+                    Glide.with(holder.profilePic.getContext()).load(documentSnapshot.getString("image")).into(holder.profilePic);
+                }
+            }
+        });
     }
 
     @NonNull
@@ -48,6 +67,7 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
     public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.everypost, parent, false);
+        firestore = FirebaseFirestore.getInstance();
         return new myviewholder(view);
     }
 
@@ -59,11 +79,13 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
 
         public myviewholder(@NonNull View itemView) {
             super(itemView);
-            //profilePic = (CircleImageView) itemView.findViewById(R.id.profile_pic);
+            profilePic = (CircleImageView) itemView.findViewById(R.id.profile_pic);
             postPic = (ImageView)itemView.findViewById(R.id.user_post);
             postUsername = (TextView)itemView.findViewById(R.id.username_tv);
-            postDate = (TextView)itemView.findViewById(R.id.date_tv);
+
             postCaption = (TextView)itemView.findViewById(R.id.caption_tv);
+
+
 
         }
     }
