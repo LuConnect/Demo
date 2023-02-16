@@ -131,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Post"), post.class)
                         .build();
 
+
+
         adapter = new PostAdaptor(options);
         mRecyclerView.setAdapter(adapter);
         //adapter.startListening();
