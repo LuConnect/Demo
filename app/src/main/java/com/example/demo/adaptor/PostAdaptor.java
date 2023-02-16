@@ -42,9 +42,9 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
     protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull post model) {
 
 
-        holder.postCaption.setText(model.getCaption());
-        System.out.println("caption: "+ model.getCaption());
-        Glide.with(holder.postPic.getContext()).load(model.getImage()).into(holder.postPic);
+//        holder.postCaption.setText(model.getCaption());
+//        System.out.println("caption: "+ model.getCaption());
+//        Glide.with(holder.postPic.getContext()).load(model.getImage()).into(holder.postPic);
 
         firestore = FirebaseFirestore.getInstance();
         String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -57,6 +57,10 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
                     String userName = documentSnapshot.getString("name");
                     holder.postUsername.setText(userName);
                     Glide.with(holder.profilePic.getContext()).load(documentSnapshot.getString("image")).into(holder.profilePic);
+
+                    holder.postCaption.setText(model.getCaption());
+                    System.out.println("caption: "+ model.getCaption());
+                    Glide.with(holder.postPic.getContext()).load(model.getImage()).into(holder.postPic);
                 }
             }
         });

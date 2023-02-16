@@ -86,7 +86,7 @@ public class addpostActivity extends AppCompatActivity {
                 mprogressbar.setVisibility(View.VISIBLE);
                 String caption = mcaptionButton.getText().toString();
                 if (!caption.isEmpty() && postImageUri !=null){
-                    StorageReference postRef = storageReference.child("post_images").child( ".jpg");
+                    StorageReference postRef = storageReference.child("post_images").child( FieldValue.serverTimestamp() +".jpg");
                     postRef.putFile(postImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
