@@ -51,7 +51,7 @@ public class addpostActivity extends AppCompatActivity {
 
         mpostButton = findViewById(R.id.post_button);
         mcaptionButton = findViewById(R.id.cratepost);
-        mpostImage = findViewById(R.id.createimg);
+        //mpostImage = findViewById(R.id.createimg);
 
         mprogressbar = findViewById(R.id.progressBar3);
         mprogressbar.setVisibility(View.INVISIBLE);
@@ -66,16 +66,16 @@ public class addpostActivity extends AppCompatActivity {
         currentUserId = auth.getCurrentUser().getUid();
 
 
-        mpostImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CropImage.activity()
-                        .setGuidelines(CropImageView.Guidelines.ON)
-                        .setAspectRatio(3,2)
-                        .setMinCropResultSize(512,512)
-                        .start(addpostActivity.this);
-            }
-        });
+//        mpostImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                CropImage.activity()
+//                        .setGuidelines(CropImageView.Guidelines.ON)
+//                        .setAspectRatio(3,2)
+//                        .setMinCropResultSize(512,512)
+//                        .start(addpostActivity.this);
+//            }
+//        });
 
 
         mpostButton.setOnClickListener(new View.OnClickListener() {
@@ -85,15 +85,8 @@ public class addpostActivity extends AppCompatActivity {
 
                 mprogressbar.setVisibility(View.VISIBLE);
                 String caption = mcaptionButton.getText().toString();
-                if (!caption.isEmpty() && postImageUri !=null){
-                    StorageReference postRef = storageReference.child("post_images").child( FieldValue.serverTimestamp() +".jpg");
-                    postRef.putFile(postImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if (task.isSuccessful()){
-                                postRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
+                if (!caption.isEmpty() ){
+
 //                                        HashMap<String , Object> postMap = new HashMap<>();
 //                                        postMap.put("image" , uri.toString());
 //                                        postMap.put("user" , currentUserId);
@@ -103,7 +96,7 @@ public class addpostActivity extends AppCompatActivity {
                                         String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                         database = FirebaseDatabase.getInstance();
                                         DatabaseReference root =  database.getReference("Post");
-                                        adapt1 Post = new adapt1(postImageUri.toString(),currentuser, caption);
+                                        adapt1 Post = new adapt1(currentuser, caption);
                                         String key = root.push().getKey();
                                         root.child(key).setValue(Post);
                                         mprogressbar.setVisibility(View.INVISIBLE);
@@ -126,15 +119,7 @@ public class addpostActivity extends AppCompatActivity {
 //                                                }
 //                                            }
 //                                        });
-                                    }
-                                });
 
-                            }else{
-                                mprogressbar.setVisibility(View.INVISIBLE);
-                                Toast.makeText(addpostActivity.this, task.getException().getMessage() , Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
                 }else{
                     mprogressbar.setVisibility(View.INVISIBLE);
                     Toast.makeText(addpostActivity.this, "Please Add Image and Write Your caption", Toast.LENGTH_SHORT).show();
@@ -145,18 +130,18 @@ public class addpostActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK){
-
-                postImageUri = result.getUri();
-                mpostImage.setImageURI(postImageUri);
-            }else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
-                Toast.makeText(this, result.getError().toString(), Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
+//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+//            if (resultCode == RESULT_OK){
+//
+//                postImageUri = result.getUri();
+//                mpostImage.setImageURI(postImageUri);
+//            }else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
+//                Toast.makeText(this, result.getError().toString(), Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//    }
 }

@@ -5,22 +5,14 @@ import java.util.Date;
 
 public class post {
 
-    private String image, caption;
+    private String caption;
 
     public post(){
 
     }
-    public post(String image, String caption) {
-        this.image = image;
+    public post(String caption) {
+
         this.caption = caption;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getCaption() {

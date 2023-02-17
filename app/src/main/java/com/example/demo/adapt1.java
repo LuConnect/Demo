@@ -2,24 +2,12 @@ package com.example.demo;
 
 public class adapt1 {
 
-    private String postImageUri,currentUserId,caption,Time;
+    private String currentUserId,caption,Time;
 
-
-
-
-    public adapt1(String postImageUri, String currentUserId, String caption) {
-        this.postImageUri = postImageUri;
+    public adapt1(String currentUserId, String caption) {
         this.currentUserId = currentUserId;
         this.caption = caption;
         //this.Time = String.valueOf(time);
-    }
-
-    public String getPostImageUri() {
-        return postImageUri;
-    }
-
-    public void setPostImageUri(String postImageUri) {
-        this.postImageUri = postImageUri;
     }
 
     public String getCurrentUserId() {

@@ -25,13 +25,13 @@
 
 
 
-        <ImageView
-            android:id="@+id/createimg"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:background="@drawable/menu_icon"
-            android:scaleType="centerCrop"
-            />
+<!--        <ImageView-->
+<!--            android:id="@+id/createimg"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="250dp"-->
+<!--            android:background="@drawable/menu_icon"-->
+<!--            android:scaleType="centerCrop"-->
+<!--            />-->
 
 
         <ProgressBar
@@ -42,23 +42,22 @@
 
         <EditText
             android:id="@+id/cratepost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="274dp"
+            android:layout_height="87dp"
 
-            android:layout_marginTop="60dp"
-            android:layout_marginHorizontal="30dp"
-            android:ems="10"
             android:layout_gravity="center"
-            android:textColor="#F1F8FF"
-            android:textColorHint="#7D80C7"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="60dp"
+            android:clickable="true"
+            android:ems="10"
             android:hint="Write your post"
             android:inputType="text"
-            android:clickable="true"
             android:textAlignment="center"
+            android:textColor="#F1F8FF"
+            android:textColorHint="#7D80C7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 <!--            tools:layout_editor_absoluteY="378dp" />-->
 
 

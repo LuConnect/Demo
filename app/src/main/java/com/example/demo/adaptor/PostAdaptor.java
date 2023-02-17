@@ -60,7 +60,7 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
 
                     holder.postCaption.setText(model.getCaption());
                     System.out.println("caption: "+ model.getCaption());
-                    Glide.with(holder.postPic.getContext()).load(model.getImage()).into(holder.postPic);
+                    //Glide.with(holder.postPic.getContext()).load(model.getImage()).into(holder.postPic);
                 }
             }
         });
@@ -84,7 +84,7 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
         public myviewholder(@NonNull View itemView) {
             super(itemView);
             profilePic = (CircleImageView) itemView.findViewById(R.id.profile_pic);
-            postPic = (ImageView)itemView.findViewById(R.id.user_post);
+            //postPic = (ImageView)itemView.findViewById(R.id.user_post);
             postUsername = (TextView)itemView.findViewById(R.id.username_tv);
 
             postCaption = (TextView)itemView.findViewById(R.id.caption_tv);
