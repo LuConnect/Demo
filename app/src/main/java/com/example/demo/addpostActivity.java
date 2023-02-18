@@ -127,7 +127,6 @@ public class addpostActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
 //    @Override
