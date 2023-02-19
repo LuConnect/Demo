@@ -1,6 +1,9 @@
 package com.example.demo.adaptor;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.demo.Comments;
 import com.example.demo.MainActivity;
 import com.example.demo.R;
 import com.example.demo.model.post;
@@ -33,10 +38,14 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
 
     private FirebaseFirestore firestore;
 
+//    public void onAttach(Context context){
+//        this.context = context;
+//    }
 
-    public PostAdaptor(@NonNull FirebaseRecyclerOptions<post> options) {
+    public PostAdaptor(@NonNull  FirebaseRecyclerOptions<post> options) {
         super(options);
     }
+
 
     @Override
     protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull post model) {
@@ -64,6 +73,14 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
                 }
             }
         });
+
+        holder.commentPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent comments = new Intent(v.getContext(), Comments.class);
+                v.getContext().startActivity(comments);
+            }
+        });
     }
 
     @NonNull
@@ -88,6 +105,7 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
             postUsername = (TextView)itemView.findViewById(R.id.username_tv);
 
             postCaption = (TextView)itemView.findViewById(R.id.caption_tv);
+            commentPic = (ImageView) itemView.findViewById(R.id.comments_post);
 
 
 
