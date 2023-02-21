@@ -37,6 +37,7 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
 {
 
     private FirebaseFirestore firestore;
+    //String time = String.valueOf(System.currentTimeMillis());
 
 //    public void onAttach(Context context){
 //        this.context = context;
@@ -74,10 +75,14 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
             }
         });
 
+        String time = model.getTime();
+        //time = String.valueOf(System.currentTimeMillis());
         holder.commentPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent comments = new Intent(v.getContext(), Comments.class);
+
+                comments.putExtra("post_id", time);
                 v.getContext().startActivity(comments);
             }
         });
@@ -96,7 +101,7 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
     {
         ImageView postPic, commentPic, likePic;
         CircleImageView profilePic;
-        TextView postUsername, postDate, postCaption, postLikes;
+        TextView postUsername, posttime, postCaption, postLikes;
 
         public myviewholder(@NonNull View itemView) {
             super(itemView);

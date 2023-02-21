@@ -2,12 +2,28 @@ package com.example.demo;
 
 public class adapt1 {
 
-    private String currentUserId,caption,Time;
+    private String currentUserId,caption;
+    String time = String.valueOf(System.currentTimeMillis());
+
+
+    public adapt1(String currentUserId, String caption, String time) {
+        this.currentUserId = currentUserId;
+        this.caption = caption;
+        this.time = time;
+    }
 
     public adapt1(String currentUserId, String caption) {
         this.currentUserId = currentUserId;
         this.caption = caption;
-        //this.Time = String.valueOf(time);
+
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getCurrentUserId() {

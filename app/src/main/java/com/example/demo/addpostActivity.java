@@ -92,13 +92,13 @@ public class addpostActivity extends AppCompatActivity {
 //                                        postMap.put("user" , currentUserId);
 //                                        postMap.put("caption" , caption);
 //                                        postMap.put("time" , FieldValue.serverTimestamp());
-
+                                        String time = String.valueOf(System.currentTimeMillis());
                                         String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                         database = FirebaseDatabase.getInstance();
                                         DatabaseReference root =  database.getReference("Post");
-                                        adapt1 Post = new adapt1(currentuser, caption);
-                                        String key = root.push().getKey();
-                                        root.child(key).setValue(Post);
+                                        adapt1 Post = new adapt1(currentuser, caption, time);
+                                        //String key = root.push().getKey();
+                                        root.child(time).setValue(Post);
                                         mprogressbar.setVisibility(View.INVISIBLE);
                                         Toast.makeText(addpostActivity.this, "Post Added Successfully !!", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(addpostActivity.this , MainActivity.class));

@@ -5,9 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,17 +25,19 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 
+import java.util.ArrayList;
 import java.util.List;
-
-
-
-
+import java.util.zip.Inflater;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,14 +46,13 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private Toolbar mainToolbar;
     private RecyclerView mRecyclerView;
+
     private FloatingActionButton fab;
 
     private PostAdaptor adapter;
-    private List<post> list;
+
     private Query query;
     private ListenerRegistration listenerRegistration;
-
-
 
 
 
@@ -71,9 +74,13 @@ public class MainActivity extends AppCompatActivity {
 
         //mRecyclerView.setAdapter(adapter);
 
+
+
+
         mainToolbar = findViewById(R.id.maintoolbar);
         setSupportActionBar(mainToolbar);
         getSupportActionBar().setTitle("Lu Connect");
+
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
         //adapter.startListening();
 
     }
+
+
 
     protected void onStart() {
         super.onStart();
