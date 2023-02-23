@@ -58,12 +58,13 @@ public class Comments extends AppCompatActivity {
             public void onClick(View v) {
                 String comment = commentEdit.getText().toString();
                 if (!comment.isEmpty()){
+                    String time = String.valueOf(System.currentTimeMillis());
                     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     database = FirebaseDatabase.getInstance();
-                    DatabaseReference root =  database.getReference().child("Post").child(post_id).child("Comment");
+                    DatabaseReference root =  database.getReference("Post").child(post_id).child("Comment");
                     adapt2 Comment = new adapt2(currentuser, comment);
-                    String key = root.push().getKey();
-                    root.child(key).setValue(Comment);
+                    //String key = root.push().getKey();
+                    root.child(time).setValue(Comment);
 
                     Toast.makeText(Comments.this, "Comment Added Successfully !!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Comments.this , MainActivity.class));
@@ -81,10 +82,10 @@ public class Comments extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        String time = String.valueOf(System.currentTimeMillis());
         FirebaseRecyclerOptions<Mcomment> options =
                 new FirebaseRecyclerOptions.Builder<Mcomment>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Post").child(post_id).child("Comment"), Mcomment.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Post").child(time).child("Comment"), Mcomment.class)
                         .build();
 
 
@@ -109,8 +110,11 @@ public class Comments extends AppCompatActivity {
                             System.out.println("caption: "+ model.getComments());
 
                         }
+
                     }
+
                 });
+
 
             }
 

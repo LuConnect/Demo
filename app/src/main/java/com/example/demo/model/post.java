@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class post {
 
-    private String caption, time=String.valueOf(System.currentTimeMillis());;
+    private String caption, time=String.valueOf(System.currentTimeMillis());
 
     public post(){
 

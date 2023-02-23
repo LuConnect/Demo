@@ -13,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -94,6 +96,8 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
                 FirebaseDatabase.getInstance().getReference().child("Post").child(time).removeValue();
             }
         });
+
+
     }
 
     @NonNull
@@ -120,9 +124,6 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
             postCaption = (TextView)itemView.findViewById(R.id.caption_tv);
             commentPic = (ImageView) itemView.findViewById(R.id.comments_post);
             delete= (ImageView) itemView.findViewById(R.id.delete_btn);
-
-
-
 
 
         }
