@@ -5,11 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,19 +24,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.zip.Inflater;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -182,14 +173,51 @@ public class MainActivity extends AppCompatActivity {
         adapter.stopListening();
     }
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+
+
+        MenuItem item = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+                processSearch(s);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                processSearch(s);
+                return false;
+            }
+        });
+
         return true;
 
     }
 
-    @Override
+
+
+
+    public void processSearch(String s) {
+
+        FirebaseRecyclerOptions<post> options =
+                new FirebaseRecyclerOptions.Builder<post>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Post").orderByChild("caption").startAt(s).endAt(s + "\uf8ff"), post.class)
+                        .build();
+
+        adapter = new PostAdaptor(options);
+        adapter.startListening();
+        mRecyclerView.setAdapter(adapter);
+
+    }
+
+
+
+        @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.profileMenu){
             startActivity(new Intent(MainActivity.this, setprofile.class));
@@ -220,4 +248,13 @@ public class MainActivity extends AppCompatActivity {
         }
         return  true;
     }
-}
+
+
+
+
+
+
+
+
+
+    }

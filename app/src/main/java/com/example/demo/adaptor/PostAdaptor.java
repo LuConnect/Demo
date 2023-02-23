@@ -99,7 +99,7 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
 
     class myviewholder extends RecyclerView.ViewHolder
     {
-        ImageView postPic, commentPic, likePic;
+        ImageView postPic, commentPic, likePic,delete;
         CircleImageView profilePic;
         TextView postUsername, posttime, postCaption, postLikes;
 
@@ -111,6 +111,9 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
 
             postCaption = (TextView)itemView.findViewById(R.id.caption_tv);
             commentPic = (ImageView) itemView.findViewById(R.id.comments_post);
+            delete= (ImageView) itemView.findViewById(R.id.delete_btn);
+
+
 
 
 
