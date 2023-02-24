@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".registrationpage"
     android:orientation="vertical"
-    android:background="#98BA7D">
+    android:background="@drawable/p8">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="39dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="90dp"
         android:gravity="center"
         android:text="Registration"
-        android:textColor="#194E48"
+        android:textColor="#1C2833 "
         android:textSize="28sp"
 
 
@@ -25,7 +25,7 @@
         android:layout_height="20dp"
         android:gravity="center"
         android:text="Create Your Account"
-        android:textColor="#194E48"
+        android:textColor="#1C2833 "
         android:textSize="15sp"
 
 
@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/two_coloured"
         android:orientation="horizontal">
@@ -218,7 +218,7 @@
         android:layout_marginRight="100dp"
         android:gravity="center"
         android:text="SIGN UP"
-        android:textColor="#194E48"
+        android:textColor="#1C2833 "
         android:clickable="true"
         android:background="@drawable/circle_transparent"
         android:foreground="@drawable/circle_transparent"

@@ -6,17 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".loginpage"
     android:orientation="vertical"
-    android:background="#98ba7D"
+    android:background="@color/colorLoginPrimaryDark"
     >
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        android:src="@drawable/login_hero_image"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="35dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="45dp"
-
-        android:textColor="#194E48"
+        android:textColor="#2471A3"
         android:text="WELCOME"
         android:textSize="30dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_horizontal" />
     <TextView
         android:layout_width="match_parent"
@@ -25,18 +36,18 @@
         android:textStyle="normal"
         android:text="Sign in to continue"
         android:textAlignment="center"
-        android:textColor="#194E48"
+        android:textColor="#2874A6 "
         android:gravity="center_horizontal" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="26dp"
-        android:textColor="#194E48"
+        android:textColor="#2471A3"
         android:text="EMAIL"
         android:textStyle="bold"
         android:textSize="16dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         />
     <EditText
         android:id="@+id/edemail"
@@ -54,12 +65,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="26dp"
-        android:textColor="#194E48"
+        android:textColor="#2471A3"
         android:text="PASSWORD"
         android:textStyle="bold"
         android:textSize="16dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         />
     <EditText
         android:id="@+id/edpass"
@@ -79,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:orientation="horizontal"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:layout_weight="2"
         >
         <TextView
@@ -94,7 +105,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="30dp"
-            android:textColor="#194E48"
+            android:textColor="#1B4F72"
             android:background="@drawable/circle_transparent"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackground"
@@ -115,7 +126,7 @@
             android:layout_marginRight="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
-            android:textColor="#194E48"
+            android:textColor="#1B4F72"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackground"
             android:background="@drawable/circle_transparent"
