@@ -5,11 +5,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +27,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -46,6 +43,7 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
 //    public void onAttach(Context context){
 //        this.context = context;
 //    }
+
     public PostAdaptor(@NonNull  FirebaseRecyclerOptions<post> options) {
         super(options);
     }
@@ -96,8 +94,6 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
                 FirebaseDatabase.getInstance().getReference().child("Post").child(time).removeValue();
             }
         });
-
-
     }
 
     @NonNull
@@ -107,8 +103,6 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.everypost, parent, false);
         firestore = FirebaseFirestore.getInstance();
         return new myviewholder(view);
-
-
     }
 
     class myviewholder extends RecyclerView.ViewHolder
