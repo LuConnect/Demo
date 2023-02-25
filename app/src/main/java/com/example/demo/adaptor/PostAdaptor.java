@@ -84,7 +84,6 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
             @Override
             public void onClick(View v) {
                 Intent comments = new Intent(v.getContext(), Comments.class);
-
                 comments.putExtra("post_id", time);
                 v.getContext().startActivity(comments);
             }

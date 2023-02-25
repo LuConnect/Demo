@@ -3,6 +3,7 @@ package com.example.demo;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +20,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -28,6 +35,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class addpostActivity extends AppCompatActivity {
 
@@ -42,6 +52,8 @@ public class addpostActivity extends AppCompatActivity {
     private String currentUserId;
     private Toolbar postToolbar;
     private FirebaseDatabase database;
+
+    String image, name;
 
 
     @Override
@@ -65,62 +77,79 @@ public class addpostActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         currentUserId = auth.getCurrentUser().getUid();
 
+        //FirebaseUser firebaseUser = auth.getCurrentUser();
 
-//        mpostImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                CropImage.activity()
-//                        .setGuidelines(CropImageView.Guidelines.ON)
-//                        .setAspectRatio(3,2)
-//                        .setMinCropResultSize(512,512)
-//                        .start(addpostActivity.this);
-//            }
-//        });
+
+
+
+        //.....................................................................
+
+
+
+
+
+
+        //.....................................................................
+
+
+
+
+
+
 
 
         mpostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //String captio = mcaptionButton.getText().toString();
+
+                DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(currentUserId);
+                // Query the Firestore document to get the data you want to copy
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            // Get the data fields you want to copy
+                            String field1 = documentSnapshot.getString("name");
+                            String field2 = documentSnapshot.getString("image");
+                            // ...
+
+                            // Create a map with the data fields you want to copy
+                            Map<String, Object> data = new HashMap<>();
+                            data.put("name", field1);
+                            data.put("image", field2);
+                            // ...
+                            // Get a reference to the Realtime Database location where you want to paste the data
+                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("post User");
+                            // Paste the data to the Realtime Database location
+                            dbRef.setValue(data);
+                        }
+                    }
+                });
+
 
                 mprogressbar.setVisibility(View.VISIBLE);
                 String caption = mcaptionButton.getText().toString();
-                if (!caption.isEmpty() ){
+                if (!caption.isEmpty()) {
 
-//                                        HashMap<String , Object> postMap = new HashMap<>();
-//                                        postMap.put("image" , uri.toString());
-//                                        postMap.put("user" , currentUserId);
-//                                        postMap.put("caption" , caption);
-//                                        postMap.put("time" , FieldValue.serverTimestamp());
-                                        String time = String.valueOf(System.currentTimeMillis());
-                                        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                        database = FirebaseDatabase.getInstance();
-                                        DatabaseReference root =  database.getReference("Post");
-                                        adapt1 Post = new adapt1(currentuser, caption, time);
-                                        //String key = root.push().getKey();
-                                        root.child(time).setValue(Post);
-                                        mprogressbar.setVisibility(View.INVISIBLE);
-                                        Toast.makeText(addpostActivity.this, "Post Added Successfully !!", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(addpostActivity.this , MainActivity.class));
-                                        finish();
+                    String time = String.valueOf(System.currentTimeMillis());
+                    String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    database = FirebaseDatabase.getInstance();
+                    DatabaseReference root = database.getReference("Post");
+                    adapt1 Post = new adapt1(currentuser, caption, time);
+                    //String key = root.push().getKey();
+                    root.child(time).setValue(Post);
 
 
-//                                        firestore.collection("Posts").add(postMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-//                                            @Override
-//                                            public void onComplete(@NonNull Task<DocumentReference> task) {
-//                                                if (task.isSuccessful()){
-//                                                    mprogressbar.setVisibility(View.INVISIBLE);
-//                                                    Toast.makeText(addpostActivity.this, "Post Added Successfully !!", Toast.LENGTH_SHORT).show();
-//                                                    startActivity(new Intent(addpostActivity.this , MainActivity.class));
-//                                                    finish();
-//                                                }else{
-//                                                    mprogressbar.setVisibility(View.INVISIBLE);
-//                                                    Toast.makeText(addpostActivity.this, task.getException().toString() , Toast.LENGTH_SHORT).show();
-//                                                }
-//                                            }
-//                                        });
 
-                }else{
+                    mprogressbar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(addpostActivity.this, "Post Added Successfully !!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(addpostActivity.this, MainActivity.class));
+                    finish();
+
+
+                } else {
                     mprogressbar.setVisibility(View.INVISIBLE);
                     Toast.makeText(addpostActivity.this, "Please Add Image and Write Your caption", Toast.LENGTH_SHORT).show();
                 }
@@ -129,18 +158,4 @@ public class addpostActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
-//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-//            if (resultCode == RESULT_OK){
-//
-//                postImageUri = result.getUri();
-//                mpostImage.setImageURI(postImageUri);
-//            }else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
-//                Toast.makeText(this, result.getError().toString(), Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
 }

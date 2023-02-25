@@ -25,6 +25,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -92,6 +94,13 @@ public class setprofile extends AppCompatActivity {
                         profilename.setText(name);
                         Glide.with(setprofile.this).load(imageUrl).into(circleImageView);
 
+                        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        FirebaseDatabase db = FirebaseDatabase.getInstance();
+                        DatabaseReference root = db.getReference("Users");
+                        userhelper helper = new userhelper(name, imageUrl, currentuser);
+                        root.child(Uid).setValue(helper);
+
+
                     }
 
                 }
@@ -115,6 +124,7 @@ public class setprofile extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 progressBar.setVisibility(View.INVISIBLE);
                                 saveToFireStore(task, name, imageRef);
+
                             }
                             else{
                                 Toast.makeText(setprofile.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();

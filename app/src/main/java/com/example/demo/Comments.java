@@ -36,7 +36,7 @@ public class Comments extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private String post_id;
     private FirebaseDatabase database;
-
+    CommentAdaptor adaptor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +58,13 @@ public class Comments extends AppCompatActivity {
             public void onClick(View v) {
                 String comment = commentEdit.getText().toString();
                 if (!comment.isEmpty()){
-                    String time = String.valueOf(System.currentTimeMillis());
+                    //String time = String.valueOf(System.currentTimeMillis());
                     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     database = FirebaseDatabase.getInstance();
                     DatabaseReference root =  database.getReference("Post").child(post_id).child("Comment");
                     adapt2 Comment = new adapt2(currentuser, comment);
-                    //String key = root.push().getKey();
-                    root.child(time).setValue(Comment);
+                    String key = root.push().getKey();
+                    root.child(key).setValue(Comment);
 
                     Toast.makeText(Comments.this, "Comment Added Successfully !!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Comments.this , MainActivity.class));
@@ -77,55 +77,21 @@ public class Comments extends AppCompatActivity {
             }
         });
 
+        String time = String.valueOf(System.currentTimeMillis());
+        FirebaseRecyclerOptions<Mcomment> options =
+                new FirebaseRecyclerOptions.Builder<Mcomment>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Post").child(post_id).child("Comment"), Mcomment.class)
+                        .build();
+
+        adaptor= new CommentAdaptor(options);
+        comment_recyclerView.setAdapter(adaptor);
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        String time = String.valueOf(System.currentTimeMillis());
-        FirebaseRecyclerOptions<Mcomment> options =
-                new FirebaseRecyclerOptions.Builder<Mcomment>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Post").child(time).child("Comment"), Mcomment.class)
-                        .build();
 
-
-        FirebaseRecyclerAdapter<Mcomment, CommentAdaptor> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<Mcomment, CommentAdaptor>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull CommentAdaptor holder, int position, @NonNull Mcomment model) {
-
-                firestore = FirebaseFirestore.getInstance();
-                String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DocumentReference documentReference = firestore.collection("Users").document(currentUser);
-
-                documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()){
-                            String userName = documentSnapshot.getString("name");
-                            holder.commentusername.setText(userName);
-                            Glide.with(holder.commentuserpic.getContext()).load(documentSnapshot.getString("image")).into(holder.commentuserpic);
-
-
-                            holder.comments.setText(model.getComments());
-                            System.out.println("caption: "+ model.getComments());
-
-                        }
-
-                    }
-
-                });
-
-
-            }
-
-            @NonNull
-            @Override
-            public CommentAdaptor onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.everycomment, parent, false);
-                return new CommentAdaptor(view);
-            }
-        };
-        firebaseRecyclerAdapter.startListening();
-        comment_recyclerView.setAdapter(firebaseRecyclerAdapter);
+        adaptor.startListening();
     }
 }

@@ -1,14 +1,14 @@
 package com.example.demo.model;
 
 public class Mcomment {
-    String comments,time=String.valueOf(System.currentTimeMillis());
+    String comments, currentuserid;
 
     public Mcomment() {
     }
 
-    public Mcomment(String comments, String time) {
+    public Mcomment(String comments, String currentuserid) {
         this.comments = comments;
-        this.time = time;
+        this.currentuserid = currentuserid;
     }
 
     public String getComments() {
@@ -19,11 +19,12 @@ public class Mcomment {
         this.comments = comments;
     }
 
-    public String getTime() {
-        return time;
+    public String getCurrentuserid() {
+        return currentuserid;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setCurrentuserid(String currentuserid) {
+        this.currentuserid = currentuserid;
     }
 }
+
