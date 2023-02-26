@@ -54,9 +54,10 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
 
         holder.postCaption.setText(model.getCaption());
         System.out.println("caption: "+ model.getCaption());
-        Glide.with(holder.profilePic.getContext()).load(model.getImage()).into(holder.profilePic);
 
         holder.postUsername.setText(model.getName());
+        Glide.with(holder.profilePic.getContext()).load(model.getImage()).into(holder.profilePic);
+
 
 
         String time = model.getTime();

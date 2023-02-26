@@ -2,17 +2,18 @@ package com.example.demo;
 
 public class adapt1 {
 
-    private String currentUserId,caption, name, pic;
+    private String currentUserId,caption, name, image;
     String time = String.valueOf(System.currentTimeMillis());
 
 
-    public adapt1(String currentUserId, String caption, String name, String pic, String time) {
+    public adapt1(String currentUserId, String caption, String name, String image, String time) {
         this.currentUserId = currentUserId;
         this.caption = caption;
         this.name = name;
-        this.pic = pic;
+        this.image = image;
         this.time = time;
     }
+
 
     public String getCurrentUserId() {
         return currentUserId;
@@ -38,12 +39,12 @@ public class adapt1 {
         this.name = name;
     }
 
-    public String getPic() {
-        return pic;
+    public String getImage() {
+        return image;
     }
 
-    public void setPic(String pic) {
-        this.pic = pic;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getTime() {
