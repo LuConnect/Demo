@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -54,6 +55,9 @@ public class addpostActivity extends AppCompatActivity {
     private FirebaseDatabase database;
 
     String image, name;
+    String userName, Image;
+    String field1, field2;
+
 
 
     @Override
@@ -90,7 +94,7 @@ public class addpostActivity extends AppCompatActivity {
 
 
         //.....................................................................
-
+        String post_id = getIntent().getStringExtra("post_id");
 
 
 
@@ -102,6 +106,7 @@ public class addpostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 //String captio = mcaptionButton.getText().toString();
 
                 DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(currentUserId);
@@ -111,17 +116,21 @@ public class addpostActivity extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         if (documentSnapshot.exists()) {
                             // Get the data fields you want to copy
-                            String field1 = documentSnapshot.getString("name");
-                            String field2 = documentSnapshot.getString("image");
+                            field1 = documentSnapshot.getString("name");
+
+                            field2 = documentSnapshot.getString("image");
+
                             // ...
 
                             // Create a map with the data fields you want to copy
                             Map<String, Object> data = new HashMap<>();
                             data.put("name", field1);
                             data.put("image", field2);
+                            String time = String.valueOf(System.currentTimeMillis());
+
                             // ...
                             // Get a reference to the Realtime Database location where you want to paste the data
-                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("post User");
+                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("PostUser");
                             // Paste the data to the Realtime Database location
                             dbRef.setValue(data);
                         }
@@ -133,11 +142,15 @@ public class addpostActivity extends AppCompatActivity {
                 String caption = mcaptionButton.getText().toString();
                 if (!caption.isEmpty()) {
 
+
+
                     String time = String.valueOf(System.currentTimeMillis());
                     String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    userName=field1;
+                    Image=field2;
                     database = FirebaseDatabase.getInstance();
                     DatabaseReference root = database.getReference("Post");
-                    adapt1 Post = new adapt1(currentuser, caption, time);
+                    adapt1 Post = new adapt1(currentuser, caption, userName, Image, time);
                     //String key = root.push().getKey();
                     root.child(time).setValue(Post);
 

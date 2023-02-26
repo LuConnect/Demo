@@ -6,11 +6,11 @@ public class adapt1 {
     String time = String.valueOf(System.currentTimeMillis());
 
 
-    public adapt1(String currentUserId, String caption,  String time) {
+    public adapt1(String currentUserId, String caption, String name, String pic, String time) {
         this.currentUserId = currentUserId;
         this.caption = caption;
-//        this.name = name;
-//        this.pic = pic;
+        this.name = name;
+        this.pic = pic;
         this.time = time;
     }
 
@@ -30,21 +30,21 @@ public class adapt1 {
         this.caption = caption;
     }
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
-//
-//    public String getPic() {
-//        return pic;
-//    }
-//
-//    public void setPic(String pic) {
-//        this.pic = pic;
-//    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
 
     public String getTime() {
         return time;

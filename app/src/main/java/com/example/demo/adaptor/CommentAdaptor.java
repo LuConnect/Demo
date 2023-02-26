@@ -30,6 +30,7 @@ public class CommentAdaptor extends FirebaseRecyclerAdapter<Mcomment, CommentAda
 
 
     private FirebaseFirestore firestore;
+
 public CommentAdaptor(FirebaseRecyclerOptions<Mcomment> options) {
         super(options);
         }
@@ -40,6 +41,8 @@ protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNu
     firestore = FirebaseFirestore.getInstance();
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
     DocumentReference documentReference = firestore.collection("Users").document(currentUser);
+
+
 
     documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
         @Override

@@ -62,6 +62,9 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
         firestore = FirebaseFirestore.getInstance();
         String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DocumentReference documentReference = firestore.collection("Users").document(currentUser);
+        //DocumentReference documentReference = firestore.collection("Users").
+
+
 
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -70,6 +73,8 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
                     String userName = documentSnapshot.getString("name");
                     holder.postUsername.setText(userName);
                     Glide.with(holder.profilePic.getContext()).load(documentSnapshot.getString("image")).into(holder.profilePic);
+
+//                    holder.postUsername.setText();
 
                     holder.postCaption.setText(model.getCaption());
                     System.out.println("caption: "+ model.getCaption());

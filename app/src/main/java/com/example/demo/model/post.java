@@ -6,14 +6,16 @@ import java.util.Date;
 public class post {
 
     private String caption, time=String.valueOf(System.currentTimeMillis());
+    String currentUser, name, Image;
 
     public post(){
 
     }
 
-    public post(String caption, String time) {
+    public post(String caption, String time, String currentUser) {
         this.caption = caption;
         this.time = time;
+        this.currentUser=currentUser;
     }
 
     public post(String caption) {
@@ -35,5 +37,12 @@ public class post {
 
     public void setCaption(String caption) {
         this.caption = caption;
+    }
+
+    public String getCurrentUser() {
+        return currentUser;
+    }
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
     }
 }
