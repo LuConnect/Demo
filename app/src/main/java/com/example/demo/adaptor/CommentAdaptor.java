@@ -38,19 +38,8 @@ public CommentAdaptor(FirebaseRecyclerOptions<Mcomment> options) {
 @Override
 protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Mcomment model) {
         // Set values of child views based on Mcomment object properties
-    firestore = FirebaseFirestore.getInstance();
-    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    DocumentReference documentReference = firestore.collection("Users").document(currentUser);
 
-
-
-    documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-        @Override
-        public void onSuccess(DocumentSnapshot documentSnapshot) {
-            if (documentSnapshot.exists()){
-                String userName = documentSnapshot.getString("name");
-                holder.usernameTextView.setText(userName);
-                Glide.with(holder.commentImage.getContext()).load(documentSnapshot.getString("image")).into(holder.commentImage);
+                //Glide.with(holder.commentImage.getContext()).load(documentSnapshot.getString("image")).into(holder.commentImage);
 
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Post").child("Comment");
                 reference.addValueEventListener(new ValueEventListener() {
@@ -70,14 +59,15 @@ protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNu
                     }
                 });
 
-//                holder.commentTextView.setText(model.getComments());
-//                System.out.println("caption: "+ model.getComments());
-                //Glide.with(holder.postPic.getContext()).load(motCaptiondel.getImage()).into(holder.postPic);
+                holder.commentTextView.setText(model.getComments());
+                System.out.println("caption: "+ model.getComments());
+                Glide.with(holder.commentImage.getContext()).load(model.getImage()).into(holder.commentImage);
+                holder.usernameTextView.setText(model.getName());
             }
-        }
-    });
 
-        }
+
+
+
 
 @NonNull
 @Override

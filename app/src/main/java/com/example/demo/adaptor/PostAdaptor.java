@@ -42,9 +42,6 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
     private FirebaseFirestore firestore;
     //String time = String.valueOf(System.currentTimeMillis());
 
-//    public void onAttach(Context context){
-//        this.context = context;
-//    }
 
     public PostAdaptor(@NonNull  FirebaseRecyclerOptions<post> options) {
         super(options);
@@ -55,33 +52,12 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
     protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull post model) {
 
 
-//        holder.postCaption.setText(model.getCaption());
-//        System.out.println("caption: "+ model.getCaption());
-//        Glide.with(holder.postPic.getContext()).load(model.getImage()).into(holder.postPic);
+        holder.postCaption.setText(model.getCaption());
+        System.out.println("caption: "+ model.getCaption());
+        Glide.with(holder.profilePic.getContext()).load(model.getImage()).into(holder.profilePic);
 
-        firestore = FirebaseFirestore.getInstance();
-        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DocumentReference documentReference = firestore.collection("Users").document(currentUser);
-        //DocumentReference documentReference = firestore.collection("Users").
+        holder.postUsername.setText(model.getName());
 
-
-
-        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()){
-                    String userName = documentSnapshot.getString("name");
-                    holder.postUsername.setText(userName);
-                    Glide.with(holder.profilePic.getContext()).load(documentSnapshot.getString("image")).into(holder.profilePic);
-
-//                    holder.postUsername.setText();
-
-                    holder.postCaption.setText(model.getCaption());
-                    System.out.println("caption: "+ model.getCaption());
-                    //Glide.with(holder.postPic.getContext()).load(model.getImage()).into(holder.postPic);
-                }
-            }
-        });
 
         String time = model.getTime();
         //time = String.valueOf(System.currentTimeMillis());
