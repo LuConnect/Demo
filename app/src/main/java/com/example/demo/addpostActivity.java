@@ -164,7 +164,7 @@ public class addpostActivity extends AppCompatActivity {
 
                 } else {
                     mprogressbar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(addpostActivity.this, "Please Add Image and Write Your caption", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(addpostActivity.this, "Please Write Post!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

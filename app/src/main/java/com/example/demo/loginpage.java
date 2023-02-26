@@ -83,7 +83,7 @@ public class loginpage extends AppCompatActivity {
                 edpass.setError("Enter proper password");
             }
             else{
-                progressDialog.setMessage("please wait while login is completing...");
+                progressDialog.setMessage("please wait while login is completed...");
                 progressDialog.setTitle("login");
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
