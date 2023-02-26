@@ -54,9 +54,9 @@ public class addpostActivity extends AppCompatActivity {
     private Toolbar postToolbar;
     private FirebaseDatabase database;
 
-    String image, name;
+    String image,name;
     String userName, Image;
-    String field1, field2;
+
 
 
 
@@ -106,55 +106,33 @@ public class addpostActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-                //String captio = mcaptionButton.getText().toString();
-
-                DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(currentUserId);
-                // Query the Firestore document to get the data you want to copy
-                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            // Get the data fields you want to copy
-                            field1 = documentSnapshot.getString("name");
-
-                            field2 = documentSnapshot.getString("image");
-
-                            // ...
-
-                            // Create a map with the data fields you want to copy
-                            Map<String, Object> data = new HashMap<>();
-                            data.put("name", field1);
-                            data.put("image", field2);
-                            String time = String.valueOf(System.currentTimeMillis());
-
-                            // ...
-                            // Get a reference to the Realtime Database location where you want to paste the data
-                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("PostUser");
-                            // Paste the data to the Realtime Database location
-                            dbRef.setValue(data);
-                        }
-                    }
-                });
-
-
                 mprogressbar.setVisibility(View.VISIBLE);
                 String caption = mcaptionButton.getText().toString();
                 if (!caption.isEmpty()) {
 
+                    firestore = FirebaseFirestore.getInstance();
+                    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    DocumentReference documentReference = firestore.collection("Users").document(currentUser);
+                    documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()){
+                                name = documentSnapshot.getString("name");
+                                image = documentSnapshot.getString("image");
 
 
-                    String time = String.valueOf(System.currentTimeMillis());
-                    String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    userName=field1;
-                    Image=field2;
-                    database = FirebaseDatabase.getInstance();
-                    DatabaseReference root = database.getReference("Post");
-                    adapt1 Post = new adapt1(currentuser, caption, userName, Image, time);
-                    //String key = root.push().getKey();
-                    root.child(time).setValue(Post);
+                                String time = String.valueOf(System.currentTimeMillis());
+                                String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                database = FirebaseDatabase.getInstance();
+                                DatabaseReference root = database.getReference("Post");
+                                adapt1 Post = new adapt1(currentuser, caption, name, image, time);
+                                //String key = root.push().getKey();
+                                root.child(time).setValue(Post);
 
-
+                            }
+                        }
+                    });
 
                     mprogressbar.setVisibility(View.INVISIBLE);
                     Toast.makeText(addpostActivity.this, "Post Added Successfully !!", Toast.LENGTH_SHORT).show();
@@ -164,7 +142,7 @@ public class addpostActivity extends AppCompatActivity {
 
                 } else {
                     mprogressbar.setVisibility(View.INVISIBLE);
-                    Toast.makeText(addpostActivity.this, "Please Write Post!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(addpostActivity.this, "Please Add Image and Write Your caption", Toast.LENGTH_SHORT).show();
                 }
             }
         });

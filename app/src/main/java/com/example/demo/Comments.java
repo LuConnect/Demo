@@ -38,6 +38,8 @@ public class Comments extends AppCompatActivity {
     private FirebaseDatabase database;
     CommentAdaptor adaptor;
 
+    String name, image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,13 +60,33 @@ public class Comments extends AppCompatActivity {
             public void onClick(View v) {
                 String comment = commentEdit.getText().toString();
                 if (!comment.isEmpty()){
+
+
+
+                    firestore = FirebaseFirestore.getInstance();
+                    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    DocumentReference documentReference = firestore.collection("Users").document(currentUser);
+                    documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()){
+                                name = documentSnapshot.getString("name");
+                                image = documentSnapshot.getString("image");
+
+
+                                String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                database = FirebaseDatabase.getInstance();
+                                DatabaseReference root =  database.getReference("Post").child(post_id).child("Comment");
+                                adapt2 Comment = new adapt2(currentuser, comment, name, image);
+                                String key = root.push().getKey();
+                                root.child(key).setValue(Comment);
+
+                            }
+                        }
+                    });
                     //String time = String.valueOf(System.currentTimeMillis());
-                    String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    database = FirebaseDatabase.getInstance();
-                    DatabaseReference root =  database.getReference("Post").child(post_id).child("Comment");
-                    adapt2 Comment = new adapt2(currentuser, comment);
-                    String key = root.push().getKey();
-                    root.child(key).setValue(Comment);
+
 
                     Toast.makeText(Comments.this, "Comment Added Successfully !!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Comments.this , MainActivity.class));

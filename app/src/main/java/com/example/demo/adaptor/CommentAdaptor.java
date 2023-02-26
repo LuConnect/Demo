@@ -1,3 +1,4 @@
+
 package com.example.demo.adaptor;
 
 import android.media.Image;
@@ -31,61 +32,51 @@ public class CommentAdaptor extends FirebaseRecyclerAdapter<Mcomment, CommentAda
 
     private FirebaseFirestore firestore;
 
-public CommentAdaptor(FirebaseRecyclerOptions<Mcomment> options) {
+    public CommentAdaptor(FirebaseRecyclerOptions<Mcomment> options) {
         super(options);
-        }
+    }
 
-@Override
-protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Mcomment model) {
+    @Override
+    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Mcomment model) {
         // Set values of child views based on Mcomment object properties
-    firestore = FirebaseFirestore.getInstance();
-    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    DocumentReference documentReference = firestore.collection("Users").document(currentUser);
 
+        //Glide.with(holder.commentImage.getContext()).load(documentSnapshot.getString("image")).into(holder.commentImage);
 
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Post").child("Comment");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snapshot1: snapshot.getChildren()){
 
-    documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-        @Override
-        public void onSuccess(DocumentSnapshot documentSnapshot) {
-            if (documentSnapshot.exists()){
-                String userName = documentSnapshot.getString("name");
-                holder.usernameTextView.setText(userName);
-                Glide.with(holder.commentImage.getContext()).load(documentSnapshot.getString("image")).into(holder.commentImage);
-
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Post").child("Comment");
-                reference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot snapshot1: snapshot.getChildren()){
-
-                            String M = snapshot1.child("comment").getValue().toString();
-                            holder.commentTextView.setText(M);
-                            System.out.println("caption: "+ M);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-//                holder.commentTextView.setText(model.getComments());
-//                System.out.println("caption: "+ model.getComments());
-                //Glide.with(holder.postPic.getContext()).load(motCaptiondel.getImage()).into(holder.postPic);
+                    String M = snapshot1.child("comment").getValue().toString();
+                    holder.commentTextView.setText(M);
+                    System.out.println("caption: "+ M);
+                }
             }
-        }
-    });
 
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-@NonNull
-@Override
-public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            }
+        });
+
+        holder.commentTextView.setText(model.getComments());
+        System.out.println("caption: "+ model.getComments());
+        Glide.with(holder.commentImage.getContext()).load(model.getImage()).into(holder.commentImage);
+        holder.usernameTextView.setText(model.getName());
+    }
+
+
+
+
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate layout file containing multiple child views
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.everycomment, parent, false);
         return new ViewHolder(view);
-        }
+    }
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
