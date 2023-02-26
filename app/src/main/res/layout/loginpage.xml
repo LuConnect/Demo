@@ -6,28 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".loginpage"
     android:orientation="vertical"
-    android:background="@color/colorLoginPrimaryDark"
+    android:background="@drawable/p8"
     >
 
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:cropToPadding="true"
-        android:src="@drawable/login_hero_image"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"
-        android:layout_marginTop="35dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:textColor="#2471A3"
+        android:textColor="#1C2833"
         android:text="WELCOME"
         android:textSize="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="130dp"
         android:gravity="center_horizontal" />
     <TextView
         android:layout_width="match_parent"
@@ -36,13 +27,13 @@
         android:textStyle="normal"
         android:text="Sign in to continue"
         android:textAlignment="center"
-        android:textColor="#2874A6 "
+        android:textColor="#1C2833 "
         android:gravity="center_horizontal" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="26dp"
-        android:textColor="#2471A3"
+        android:textColor="#1C2833"
         android:text="EMAIL"
         android:textStyle="bold"
         android:textSize="16dp"
@@ -58,14 +49,14 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:padding="13dp"
-        android:background="@drawable/corner"
+        android:background="@drawable/two_coloured"
         android:textColor="#5C5454"/>
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="26dp"
-        android:textColor="#2471A3"
+        android:textColor="#1C2833"
         android:text="PASSWORD"
         android:textStyle="bold"
         android:textSize="16dp"
@@ -81,7 +72,7 @@
         android:inputType="textPassword"
         android:ems="10"
         android:padding="13dp"
-        android:background="@drawable/corner"
+        android:background="@drawable/two_coloured"
         android:textColor="#5C5454"
         />
 
@@ -105,7 +96,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="30dp"
-            android:textColor="#1B4F72"
+            android:textColor="#1C2833"
             android:background="@drawable/circle_transparent"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackground"
@@ -126,7 +117,7 @@
             android:layout_marginRight="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="30dp"
-            android:textColor="#1B4F72"
+            android:textColor="#1C2833"
             android:clickable="true"
             android:foreground="?attr/selectableItemBackground"
             android:background="@drawable/circle_transparent"

@@ -46,4 +46,3 @@ public class Mcomment {
         this.image = image;
     }
 }
-
