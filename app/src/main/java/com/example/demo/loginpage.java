@@ -75,8 +75,8 @@ public class loginpage extends AppCompatActivity {
 
         String email = edemail.getText().toString();
         String pass = edpass.getText().toString();
-
-        String adminEmail = "^(?=^[A-Za-z0-9._%+-]+@)(?=.*admin\\.com$).+";
+        //String adminEmail = "^(?=^[A-Za-z0-9._%+-]+@)(?=.*admin\\.com$).+";
+        String adminEmail = "^admin@admin\\.com$";
         Pattern adminPattern = Pattern.compile(adminEmail);
         Matcher adminMatcher = adminPattern.matcher(email);
 

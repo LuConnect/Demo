@@ -130,7 +130,7 @@ public class registrationpage extends AppCompatActivity {
 
     private void sendusertologin() {
         Intent intent = new Intent(registrationpage.this, loginpage.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }
