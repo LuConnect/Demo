@@ -30,7 +30,7 @@ public class loginpage extends AppCompatActivity {
     EditText edemail,edpass;
     TextView signin,signup;
 
-    String emailReg = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    //String emailReg = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     ProgressDialog progressDialog;
 
@@ -112,7 +112,6 @@ public class loginpage extends AppCompatActivity {
                                 PostAdaptor.count = "1";
                                 Intent intent = new Intent(loginpage.this, MainActivity.class);
                                 startActivity(intent);
-
                                 Toast.makeText(loginpage.this, "Login successful", Toast.LENGTH_SHORT).show();
 
                             }
@@ -183,9 +182,5 @@ public class loginpage extends AppCompatActivity {
         }
 
     }
-//    private void sendusertologin() {
-//        Intent intent = new Intent(loginpage.this, MainActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(intent);
-//    }
+
 }

@@ -15,6 +15,11 @@ import com.example.demo.R;
 import com.example.demo.model.Mcomment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CommentAdaptor extends FirebaseRecyclerAdapter<Mcomment, CommentAdaptor.ViewHolder> {
@@ -31,28 +36,28 @@ public class CommentAdaptor extends FirebaseRecyclerAdapter<Mcomment, CommentAda
 
         //Glide.with(holder.commentImage.getContext()).load(documentSnapshot.getString("image")).into(holder.commentImage);
 
-//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Post").child("Comment");
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot snapshot1: snapshot.getChildren()){
-//
-//                    String M = snapshot1.child("comment").getValue().toString();
-//                    holder.commentTextView.setText(M);
-//                    System.out.println("caption: "+ M);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Post");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot snapshot1: snapshot.getChildren()){
 
-        holder.commentTextView.setText(model.getComments());
-        System.out.println("caption: "+ model.getComments());
+                    String M = snapshot1.child("Comment").getValue().toString();
+                    holder.commentTextView.setText(M);
+                    System.out.println("caption: "+ M);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         Glide.with(holder.commentImage.getContext()).load(model.getImage()).into(holder.commentImage);
         holder.usernameTextView.setText(model.getName());
+//        holder.commentTextView.setText(model.getComments());
+//        System.out.println("caption: "+ model.getComments());
     }
 
 

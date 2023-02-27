@@ -83,47 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
-//        if (firebaseAuth.getCurrentUser() != null){
-//
-//            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//                @Override
-//                public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-//                    super.onScrolled(recyclerView, dx, dy);
-//                    Boolean isBottom = !mRecyclerView.canScrollVertically(1);
-//                    if (isBottom){
-//                        Toast.makeText(MainActivity.this,"Reached bottom", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
-//            query = firestore.collection("Post").orderBy("time", Query.Direction.DESCENDING);
-//            listenerRegistration = query.addSnapshotListener(MainActivity.this, new EventListener<QuerySnapshot>() {
-//                @Override
-//                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//
-//                    if (error != null){
-//
-//                        Log.e("Firebase error", error.getMessage());
-//                        return;
-//
-//                    }
-//
-//                    for (DocumentChange doc : value.getDocumentChanges()){
-//                        if (doc.getType() == DocumentChange.Type.ADDED){
-//                            post Post = doc.getDocument().toObject(post.class);
-//                            list.add(Post);
-//                            adapter.notifyDataSetChanged();
-//                        }else{
-//                            adapter.notifyDataSetChanged();
-//                        }
-//                    }
-//                    listenerRegistration.remove();
-//                }
-//            });
-//        }
-
-
         FirebaseRecyclerOptions<post> options =
                 new FirebaseRecyclerOptions.Builder<post>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("Post"), post.class)
@@ -156,9 +115,7 @@ public class MainActivity extends AppCompatActivity {
                         if (!task.getResult().exists()){
                             startActivity(new Intent(MainActivity.this, setprofile.class));
                             finish();
-
                         }
-
                     }
                 }
             });
@@ -250,11 +207,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
-
-    }
+}
