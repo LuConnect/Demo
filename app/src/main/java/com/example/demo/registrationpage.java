@@ -1,8 +1,5 @@
 package com.example.demo;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,7 +22,7 @@ public class registrationpage extends AppCompatActivity {
     EditText suser,sid,spass1,semail,spass2;
     TextView signup;
     String emailReg = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-    String userEmail = "^(?=^[A-Za-z0-9._%+-]+@)(?=.*lus.ac\\.bd$).+";
+    String userEmail = "[a-z]{2,4}_[^0]{1}[0-9]{9}+@lus.ac.bd";
     ProgressDialog progressDialog;
 
     FirebaseAuth mAuth;

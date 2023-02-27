@@ -1,7 +1,6 @@
 
 package com.example.demo.adaptor;
 
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +15,6 @@ import com.example.demo.R;
 import com.example.demo.model.Mcomment;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CommentAdaptor extends FirebaseRecyclerAdapter<Mcomment, CommentAdaptor.ViewHolder> {
@@ -38,7 +28,6 @@ public class CommentAdaptor extends FirebaseRecyclerAdapter<Mcomment, CommentAda
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Mcomment model) {
-        // Set values of child views based on Mcomment object properties
 
         //Glide.with(holder.commentImage.getContext()).load(documentSnapshot.getString("image")).into(holder.commentImage);
 
@@ -65,8 +54,6 @@ public class CommentAdaptor extends FirebaseRecyclerAdapter<Mcomment, CommentAda
         Glide.with(holder.commentImage.getContext()).load(model.getImage()).into(holder.commentImage);
         holder.usernameTextView.setText(model.getName());
     }
-
-
 
 
 

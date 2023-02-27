@@ -69,8 +69,6 @@ public class loginpage extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     private void performLogin() {
@@ -82,7 +80,7 @@ public class loginpage extends AppCompatActivity {
         Pattern adminPattern = Pattern.compile(adminEmail);
         Matcher adminMatcher = adminPattern.matcher(email);
 
-        String userEmail = "^(?=^[A-Za-z0-9._%+-]+@)(?=.*lus.ac\\.bd$).+";
+        String userEmail = "[a-z]{2,4}_[^0]{1}[0-9]{9}+@lus.ac.bd";
         Pattern userPattern = Pattern.compile(userEmail);
         Matcher userMatcher = userPattern.matcher(email);
 
@@ -93,7 +91,7 @@ public class loginpage extends AppCompatActivity {
         if(adminMatcher.matches()){
             if (networkInfo!=null && networkInfo.isConnected()){
 
-                if(!email.matches(emailReg))
+                if(!email.matches(adminEmail))
                 {
                     edemail.setError("Enter correct email");
                 }else if(pass.isEmpty() || pass.length()<8)
