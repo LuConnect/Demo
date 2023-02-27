@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.example.demo.Comments;
 import com.example.demo.MainActivity;
 import com.example.demo.R;
+import com.example.demo.loginpage;
 import com.example.demo.model.post;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -39,6 +40,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myviewholder>
 {
 
+
+    public static String count = "";
     private FirebaseFirestore firestore;
     //String time = String.valueOf(System.currentTimeMillis());
 
@@ -71,12 +74,18 @@ public class PostAdaptor extends FirebaseRecyclerAdapter<post, PostAdaptor.myvie
             }
         });
 
-        holder.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseDatabase.getInstance().getReference().child("Post").child(time).removeValue();
-            }
-        });
+        if(count == "1"){
+            holder.delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FirebaseDatabase.getInstance().getReference().child("Post").child(time).removeValue();
+                }
+            });
+        }
+        else if(count == "2"){
+
+            //Toast.makeText(PostAdaptor.this, "Access denied", Toast.LENGTH_SHORT).show();
+        }
 
 
     }

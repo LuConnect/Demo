@@ -22,6 +22,7 @@ public class registrationpage extends AppCompatActivity {
     EditText suser,sid,spass1,semail,spass2;
     TextView signup;
     String emailReg = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    String userEmail = "^(?=^[A-Za-z0-9._%+-]+@)(?=.*lus.ac\\.bd$).+";
     ProgressDialog progressDialog;
 
     FirebaseAuth mAuth;
@@ -70,7 +71,7 @@ public class registrationpage extends AppCompatActivity {
 
         if (user.length()>0){
             if(id.length()<11 && id.length()>9){
-                if(email.matches(emailReg)){
+                if(email.matches(userEmail)){
 
                     if(pass1.length()>8){
                         if(pass1.equals(pass2)){
@@ -123,49 +124,6 @@ public class registrationpage extends AppCompatActivity {
             spass1.setError("Password");
             spass2.setError("Password");
         }
-
-
-        /*if(user.length()<0)
-        {
-            suser.setError("invalid username");
-        }
-        else if(id.length()>11 && id.length()<9){
-            sid.setError("invalid student id");
-        }
-        else if(!email.matches(emailReg))
-        {
-            semail.setError("Enter correct email");
-        }else if(pass1.isEmpty() || pass1.length()<8)
-        {
-            spass1.setError("Enter minimum 8 length of password");
-        }
-        else if(!pass1.equals(pass2)){
-            spass2.setError("password not matched");
-        }
-        else{
-            progressDialog.setMessage("please wait while registration is completing...");
-            progressDialog.setTitle("Registration");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
-
-            mAuth.createUserWithEmailAndPassword(email,pass1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful())
-                    {
-                        progressDialog.dismiss();
-                        sendusertologin();
-                        Toast.makeText(MainActivity2.this, "registration successful", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        progressDialog.dismiss();
-                        Toast.makeText(MainActivity2.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-        }*/
-
 
 
     }

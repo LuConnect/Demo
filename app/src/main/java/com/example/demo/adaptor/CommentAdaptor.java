@@ -42,23 +42,23 @@ public class CommentAdaptor extends FirebaseRecyclerAdapter<Mcomment, CommentAda
 
         //Glide.with(holder.commentImage.getContext()).load(documentSnapshot.getString("image")).into(holder.commentImage);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Post").child("Comment");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot snapshot1: snapshot.getChildren()){
-
-                    String M = snapshot1.child("comment").getValue().toString();
-                    holder.commentTextView.setText(M);
-                    System.out.println("caption: "+ M);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Post").child("Comment");
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot snapshot1: snapshot.getChildren()){
+//
+//                    String M = snapshot1.child("comment").getValue().toString();
+//                    holder.commentTextView.setText(M);
+//                    System.out.println("caption: "+ M);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
         holder.commentTextView.setText(model.getComments());
         System.out.println("caption: "+ model.getComments());

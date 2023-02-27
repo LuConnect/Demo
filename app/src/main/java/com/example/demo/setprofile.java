@@ -94,11 +94,11 @@ public class setprofile extends AppCompatActivity {
                         profilename.setText(name);
                         Glide.with(setprofile.this).load(imageUrl).into(circleImageView);
 
-                        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                        FirebaseDatabase db = FirebaseDatabase.getInstance();
-                        DatabaseReference root = db.getReference("Users");
-                        userhelper helper = new userhelper(name, imageUrl, currentuser);
-                        root.child(Uid).setValue(helper);
+//                        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//                        FirebaseDatabase db = FirebaseDatabase.getInstance();
+//                        DatabaseReference root = db.getReference("Users");
+//                        userhelper helper = new userhelper(name, imageUrl, currentuser);
+//                        root.child(Uid).setValue(helper);
 
 
                     }
